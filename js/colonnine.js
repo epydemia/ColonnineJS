@@ -1,4 +1,4 @@
-async function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
     const R = 6371; // Raggio della Terra in km
     const dLat = (lat2 - lat1) * Math.PI / 180;
     const dLon = (lon2 - lon1) * Math.PI / 180;
@@ -11,20 +11,27 @@ async function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
   }
   
   async function loadStations(userLat, userLon, map) {
-    const res = await fetch('https://viabilita.autostrade.it/json/colonnine.json');
+    const res = await fetch('https://viabilita.autostrade.it/json/colonnine.json?1742906702332');
     const data = await res.json();
     const aree = data.listaAree || [];
   
     const results = aree.map(area => {
-      const lat = area.lat;
-      const lon = area.lon;
-      const distanza = getDistanceFromLatLonInKm(userLat, userLon, lat, lon);
+      const lat = parseFloat(area.lat);
+      const lon = parseFloat(area.lon);
+
+      console.log("📍 User position:", userLat, userLon);
+      console.log("📌 Area:", area.nome, "Lat:", area.lat, "Lon:", area.lon);
+
+      const distanzaRaw = getDistanceFromLatLonInKm(userLat, userLon, lat, lon);
+      console.log("📏 Distanza calcolata:", distanzaRaw);
+
+      const distanza = typeof distanzaRaw === 'number' && !isNaN(distanzaRaw) ? distanzaRaw.toFixed(2) : 'N/A';
       return {
         nome: area.nome,
         strada: area.strada,
         lat,
         lon,
-        distanza: distanza.toFixed(2)
+        distanza
       };
     });
   
@@ -38,6 +45,8 @@ async function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
         <td>${station.nome}</td>
         <td>${station.strada}</td>
         <td>${station.distanza}</td>
+        <td>${station.lat}</td>
+        <td>${station.lon}</td>
       `;
       tbody.appendChild(row);
   
