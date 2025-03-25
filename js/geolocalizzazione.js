@@ -15,6 +15,9 @@ document.addEventListener("DOMContentLoaded", () => {
             attribution: '&copy; OpenStreetMap contributors'
           }).addTo(map);
 
+          window.leafletMap = map;
+          window.userCoordinates = { lat: parseFloat(lat), lon: parseFloat(lon) };
+
           L.marker([lat, lon]).addTo(map)
             .bindPopup('📍 Sei qui')
             .openPopup();
