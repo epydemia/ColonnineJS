@@ -35,8 +35,19 @@ To use this app:
 2. Allow the site to access your location
 3. See your current coordinates, road name, and position on the map
 
-## 📈 Coming Soon
+## ✅ Features Implemented
 
-- EV charger markers on the map
-- Distance to the next charger along your route
-- Directions to selected charging stations
+- Interactive map centered on your current (or simulated) position
+- Real-time geolocation with fallback to debug coordinates or GPX file
+- Orientation-aware user marker showing direction of movement
+- Reverse geocoding to determine current road
+- Fetching and displaying EV charging stations from Freeto-x
+- Table and map view of stations, sorted by distance
+- Toggle to show only the 5 nearest stations
+- Debug mode via hardcoded coordinates or uploaded GPX track
+
+## 🧭 Roadmap
+
+- Display full route polyline
+- Route-aware next charger prediction
+- Navigation instructions toward a selected charger
