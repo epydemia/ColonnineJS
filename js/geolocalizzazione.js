@@ -1,47 +1,37 @@
 document.addEventListener("DOMContentLoaded", () => {
     const coordsDiv = document.getElementById("coords");
-  
+    let userMarker = null;
+
     if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        async (position) => {
-          const lat = position.coords.latitude.toFixed(6);
-          const lon = position.coords.longitude.toFixed(6);
+      navigator.geolocation.watchPosition(
+        (position) => {
+          const lat = parseFloat(position.coords.latitude.toFixed(6));
+          const lon = parseFloat(position.coords.longitude.toFixed(6));
 
           coordsDiv.innerText = `Latitudine: ${lat}\nLongitudine: ${lon}`;
+          window.userCoordinates = { lat, lon };
 
-          // Visualizza mappa centrata sulla posizione attuale
-          const map = L.map('map').setView([lat, lon], 15);
-          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; OpenStreetMap contributors'
-          }).addTo(map);
+          // Se la mappa non è ancora inizializzata
+          if (!window.leafletMap) {
+            const map = L.map('map').setView([lat, lon], 15);
+            window.leafletMap = map;
 
-          window.leafletMap = map;
-          window.userCoordinates = { lat: parseFloat(lat), lon: parseFloat(lon) };
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+              attribution: '&copy; OpenStreetMap contributors'
+            }).addTo(map);
 
-          L.marker([lat, lon]).addTo(map)
-            .bindPopup('📍 Sei qui')
-            .openPopup();
-
-          // Reverse geocoding con Nominatim (OpenStreetMap)
-          try {
-            const response = await fetch(
-              `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&zoom=18&addressdetails=1`,
-              {
-                headers: {
-                  "User-Agent": "FreetoX-App-Daniele"
-                }
-              }
-            );
-
-            if (!response.ok) throw new Error("Errore nella richiesta di reverse geocoding");
-
-            const data = await response.json();
-            const strada = data.address.road || data.address.motorway || "Strada non trovata";
-
-            coordsDiv.innerText += `\nStrada corrente: ${strada}`;
-          } catch (err) {
-            coordsDiv.innerText += `\n(Impossibile determinare la strada: ${err.message})`;
+            userMarker = L.marker([lat, lon]).addTo(map).bindPopup('📍 Sei qui').openPopup();
+          } else {
+            // aggiorna la posizione del marker
+            if (userMarker) {
+              userMarker.setLatLng([lat, lon]);
+            } else {
+              userMarker = L.marker([lat, lon]).addTo(window.leafletMap).bindPopup('📍 Sei qui');
+            }
           }
+
+          // (facoltativo: centra la mappa)
+          // window.leafletMap.setView([lat, lon]);
         },
         (error) => {
           coordsDiv.innerText = `Errore: ${error.message}`;
