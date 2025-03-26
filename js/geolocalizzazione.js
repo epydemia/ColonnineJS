@@ -15,6 +15,21 @@ document.addEventListener("DOMContentLoaded", () => {
         return (brng + 360) % 360;
     }
 
+    function reverseGeocode(lat, lon) {
+        fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`)
+            .then(response => response.json())
+            .then(data => {
+                const strada = data.address?.road || data.display_name || "Strada non trovata";
+                const stradaDiv = document.getElementById("strada");
+                if (stradaDiv) {
+                    stradaDiv.innerText = `🛣️ ${strada}`;
+                }
+            })
+            .catch(err => {
+                console.warn("Reverse geocoding fallito:", err);
+            });
+    }
+
     if (DEBUG_POS) {
         const debugCoords = [
             { lat: 41.638756, lon: 15.453696 },
@@ -50,6 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             coordsDiv.innerText = `Latitudine: ${lat}\nLongitudine: ${lon}`;
             window.userCoordinates = { lat, lon };
+            reverseGeocode(lat, lon);
 
             const angle = window.lastUserCoordinates
                 ? (calcolaAngoloTraDuePunti(window.lastUserCoordinates.lat, window.lastUserCoordinates.lon, lat, lon) - 90)
@@ -92,6 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 coordsDiv.innerText = `Latitudine: ${lat}\nLongitudine: ${lon}`;
                 window.userCoordinates = { lat, lon };
+                reverseGeocode(lat, lon);
 
                 const angle = window.lastUserCoordinates
                     ? (calcolaAngoloTraDuePunti(window.lastUserCoordinates.lat, window.lastUserCoordinates.lon, lat, lon) - 90)
@@ -127,8 +144,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 }
 
-                // (facoltativo: centra la mappa)
-                // window.leafletMap.setView([lat, lon]);
+                //(facoltativo: centra la mappa)
+                window.leafletMap.setView([lat, lon]);
             },
             (error) => {
                 coordsDiv.innerText = `Errore: ${error.message}`;
