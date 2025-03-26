@@ -45,9 +45,13 @@ To use this app:
 - Table and map view of stations, sorted by distance
 - Toggle to show only the 5 nearest stations
 - Debug mode via hardcoded coordinates or uploaded GPX track
+> ⚠️ Currently, charging station data is only retrieved from Freeto-x.
 
 ## 🧭 Roadmap
 
 - Display full route polyline
 - Route-aware next charger prediction
 - Navigation instructions toward a selected charger
+- Add support for more operators (e.g. Ionity)
+- Detect travel direction and filter stations accordingly
+- Fetch station data in background once a day instead of every page load
