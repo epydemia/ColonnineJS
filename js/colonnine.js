@@ -48,10 +48,18 @@ async function loadStations(userLat, userLon, map) {
   });
 
   preResults.sort((a, b) => a.distanza - b.distanza);
+  const showOnlyNearest = document.querySelector("#toggleNearest")?.checked;
+  const filteredResults = showOnlyNearest ? preResults.slice(0, 5) : preResults;
 
   const results = [];
 
-  for (const area of preResults) {
+  // Rimuove i vecchi marker dalla mappa
+  if (window.stationMarkers) {
+    window.stationMarkers.forEach(m => map.removeLayer(m));
+  }
+  window.stationMarkers = [];
+
+  for (const area of filteredResults) {
     let strada = area.strada;
 
     if (typeof strada !== 'string' || strada.trim().length === 0) {
@@ -79,8 +87,9 @@ async function loadStations(userLat, userLon, map) {
     `;
     tbody.appendChild(row);
 
-    L.marker([station.lat, station.lon]).addTo(map)
+    const marker = L.marker([station.lat, station.lon]).addTo(map)
       .bindPopup(`<strong>${station.nome}</strong><br>${station.strada}<br>${station.distanza} km`);
+    window.stationMarkers.push(marker);
   });
 }
 
@@ -94,4 +103,11 @@ window.addEventListener("load", () => {
       loadStations(userPos.lat, userPos.lon, map);
     }
   }, 500);
+
+  const toggle = document.querySelector("#toggleNearest");
+  if (toggle) {
+    toggle.addEventListener("change", () => {
+      loadStations(window.userCoordinates.lat, window.userCoordinates.lon, window.leafletMap);
+    });
+  }
 });
