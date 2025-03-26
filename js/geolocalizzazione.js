@@ -1,9 +1,19 @@
-const DEBUG_POS = false;
+const DEBUG_POS = true;
 
 document.addEventListener("DOMContentLoaded", () => {
     const coordsDiv = document.getElementById("coords");
     const toggleNearest = document.getElementById("toggleNearest");
     let userMarker = null;
+
+    function calcolaAngoloTraDuePunti(lat1, lon1, lat2, lon2) {
+        const dLon = (lon2 - lon1);
+        const y = Math.sin(dLon) * Math.cos(lat2);
+        const x = Math.cos(lat1) * Math.sin(lat2) -
+                  Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLon);
+        let brng = Math.atan2(y, x);
+        brng = brng * (180 / Math.PI);
+        return (brng + 360) % 360;
+    }
 
     if (DEBUG_POS) {
         const debugCoords = [
@@ -41,22 +51,37 @@ document.addEventListener("DOMContentLoaded", () => {
             coordsDiv.innerText = `Latitudine: ${lat}\nLongitudine: ${lon}`;
             window.userCoordinates = { lat, lon };
 
+            const angle = window.lastUserCoordinates
+                ? (calcolaAngoloTraDuePunti(window.lastUserCoordinates.lat, window.lastUserCoordinates.lon, lat, lon) - 90)
+                : -90;
+
+            window.lastUserCoordinates = { lat, lon };
+
+            const userIcon = L.divIcon({
+                className: 'navigation-arrow-icon',
+                html: `<div style="transform: rotate(${angle}deg); width: 0; height: 0;
+                              border-left: 10px solid transparent;
+                              border-right: 10px solid transparent;
+                              border-bottom: 20px solid blue;"></div>`,
+                iconSize: [20, 20],
+                iconAnchor: [10, 10]
+            });
+
             if (!window.leafletMap) {
-                const map = L.map('map').setView([lat, lon], 15);
-                window.leafletMap = map;
-
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '&copy; OpenStreetMap contributors'
-                }).addTo(map);
-
-                userMarker = L.marker([lat, lon]).addTo(map).bindPopup('📍 Sei qui').openPopup();
-            } else {
-                if (userMarker) {
-                    userMarker.setLatLng([lat, lon]);
-                } else {
-                    userMarker = L.marker([lat, lon]).addTo(window.leafletMap).bindPopup('📍 Sei qui');
-                }
-            }
+              const map = L.map('map').setView([lat, lon], 15);
+              window.leafletMap = map;
+          
+              L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                  attribution: '&copy; OpenStreetMap contributors'
+              }).addTo(map);
+          }
+          
+          if (!userMarker) {
+              userMarker = L.marker([lat, lon], { icon: userIcon }).addTo(window.leafletMap).bindPopup('📍 Sei qui');
+          } else {
+              userMarker.setLatLng([lat, lon]);
+              userMarker.setIcon(userIcon);
+          }
 
         }, 3000);
     } else if ("geolocation" in navigator) {
@@ -68,7 +93,22 @@ document.addEventListener("DOMContentLoaded", () => {
                 coordsDiv.innerText = `Latitudine: ${lat}\nLongitudine: ${lon}`;
                 window.userCoordinates = { lat, lon };
 
-                // Se la mappa non è ancora inizializzata
+                const angle = window.lastUserCoordinates
+                    ? (calcolaAngoloTraDuePunti(window.lastUserCoordinates.lat, window.lastUserCoordinates.lon, lat, lon) - 90)
+                    : -90;
+
+                window.lastUserCoordinates = { lat, lon };
+
+                const userIcon = L.divIcon({
+                    className: 'navigation-arrow-icon',
+                    html: `<div style="transform: rotate(${angle}deg); width: 0; height: 0;
+                                  border-left: 10px solid transparent;
+                                  border-right: 10px solid transparent;
+                                  border-bottom: 20px solid blue;"></div>`,
+                    iconSize: [20, 20],
+                    iconAnchor: [10, 10]
+                });
+
                 if (!window.leafletMap) {
                     const map = L.map('map').setView([lat, lon], 15);
                     window.leafletMap = map;
@@ -77,13 +117,13 @@ document.addEventListener("DOMContentLoaded", () => {
                         attribution: '&copy; OpenStreetMap contributors'
                     }).addTo(map);
 
-                    userMarker = L.marker([lat, lon]).addTo(map).bindPopup('📍 Sei qui').openPopup();
+                    userMarker = L.marker([lat, lon], { icon: userIcon }).addTo(map).bindPopup('📍 Sei qui').openPopup();
                 } else {
-                    // aggiorna la posizione del marker
                     if (userMarker) {
                         userMarker.setLatLng([lat, lon]);
+                        userMarker.setIcon(userIcon);
                     } else {
-                        userMarker = L.marker([lat, lon]).addTo(window.leafletMap).bindPopup('📍 Sei qui');
+                        userMarker = L.marker([lat, lon], { icon: userIcon }).addTo(window.leafletMap).bindPopup('📍 Sei qui');
                     }
                 }
 
