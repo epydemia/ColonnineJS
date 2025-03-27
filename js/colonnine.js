@@ -91,6 +91,31 @@ async function loadStations(userLat, userLon, map) {
       .bindPopup(`<strong>${station.nome}</strong><br>${station.strada}<br>${station.distanza} km`);
     window.stationMarkers.push(marker);
   });
+
+  updateDistanceBar(results);
+}
+
+function updateDistanceBar(stations) {
+  const bar = document.getElementById("distance-bar");
+  if (!bar) return;
+
+  bar.innerHTML = ""; // Pulisce i vecchi marker
+
+  stations.forEach(station => {
+    const distanza = parseFloat(station.distanza);
+    if (isNaN(distanza) || distanza > 100) return;
+
+    const positionPercent = (distanza / 100) * 100;
+    const marker = document.createElement("div");
+    marker.title = `${station.nome} (${station.distanza} km)`;
+    marker.style.position = "absolute";
+    marker.style.left = `${positionPercent}%`;
+    marker.style.top = "-6px";
+    marker.innerText = "🔌";
+    marker.style.transform = "translateX(-50%)";
+    marker.style.fontSize = "18px";
+    bar.appendChild(marker);
+  });
 }
 
 // Aspetta che l'utente venga localizzato da geolocalizzazione.js

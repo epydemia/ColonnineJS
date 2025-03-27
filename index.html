@@ -9,6 +9,14 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+<div id="distance-bar-container" style="margin: 1em 0; display: flex; align-items: center;">
+  <div style="width: 32px; height: 32px;">
+    <div style="font-size: 24px; display: flex; align-items: center; justify-content: center; transform: scaleX(-1); animation: bounce 1s infinite;">🚗</div>
+  </div>
+  <div id="distance-bar" style="flex-grow: 1; height: 12px; background: #ccc; margin-left: 10px; position: relative; border-radius: 6px;">
+    <!-- Marker elements will be inserted dynamically -->
+  </div>
+</div>
   <h1>📍 Coordinate GPS attuali</h1>
   <div id="coords">Caricamento...</div>
   <div id="strada">🛣️ </div>
