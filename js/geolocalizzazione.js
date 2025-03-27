@@ -167,6 +167,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     let angle = -90;
                     let aggiornaHeading = true;
 
+                    // Se il browser fornisce un heading nativo, usalo
+                    if (position.coords.heading !== null && !isNaN(position.coords.heading)) {
+                        window.userHeading = position.coords.heading;
+                        aggiornaHeading = false; // non sovrascrivere con angolo calcolato
+                    }
+
                     // Ottiene e visualizza il nome della strada attuale tramite reverse geocoding
                     // Aggiorna la direzione di marcia solo se lo spostamento è superiore a 10 metri
                     // Questo evita cambi di direzione dovuti a rumore GPS o piccoli movimenti
