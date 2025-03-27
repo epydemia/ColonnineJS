@@ -43,7 +43,8 @@ async function loadStations(userLat, userLon, map) {
       strada: area.strada,
       lat,
       lon,
-      distanza
+      distanza,
+      colonnine: area.colonnine // Aggiunto per estrarre colonnine
     };
   });
 
@@ -67,10 +68,15 @@ async function loadStations(userLat, userLon, map) {
       strada = `${stradaReverse} *`;
     }
 
+    const numStalli = area.colonnine?.length ?? "?";
+    const potenza = area.colonnine?.[0]?.modello ?? "?";
+
     results.push({
       ...area,
       distanza: area.distanza.toFixed(2),
-      strada
+      strada,
+      numStalli,
+      potenza
     });
   }
 
@@ -107,7 +113,7 @@ function updateDistanceBar(stations) {
 
     const positionPercent = (distanza / 100) * 100;
     const marker = document.createElement("div");
-    marker.innerHTML = `<span title="${station.nome}\nStalli: ${station.colonnine?.length ?? "?"}\nPotenza: ${station.colonnine?.[0]?.modello ?? "?"}">🔌</span>`;
+    marker.innerHTML = `<span title="${station.nome}\nStalli: ${station.numStalli}\nPotenza: ${station.potenza}">🔌</span>`;
     marker.style.position = "absolute";
     marker.style.left = `${positionPercent}%`;
     marker.style.top = "-6px";
