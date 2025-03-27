@@ -38,20 +38,26 @@ To use this app:
 ## ✅ Features Implemented
 
 - Interactive map centered on your current (or simulated) position
-- Real-time geolocation with fallback to debug coordinates or GPX file
+- Real-time geolocation with fallback to debug coordinates
+- Toggle for debug mode and dynamic switching
 - Orientation-aware user marker showing direction of movement
 - Reverse geocoding to determine current road
-- Fetching and displaying EV charging stations from Freeto-x
+- Current heading display (degrees + cardinal direction)
+- Charging station data fetched from Freeto-x
 - Table and map view of stations, sorted by distance
-- Toggle to show only the 5 nearest stations
-- Debug mode via hardcoded coordinates or uploaded GPX track
+- Filter to show only the 5 nearest stations
+- Visual distance bar showing station icons scaled to 100 km
+- Tooltip with station info on hover
+- Simulated route via predefined debug coordinates
+
 > ⚠️ Currently, charging station data is only retrieved from Freeto-x.
 
 ## 🧭 Roadmap
 
-- Display full route polyline
-- Route-aware next charger prediction
-- Navigation instructions toward a selected charger
-- Add support for more operators (e.g. Ionity)
-- Detect travel direction and filter stations accordingly
-- Fetch station data in background once a day instead of every page load
+- Display full route polyline on the map
+- Filter chargers based on current direction of travel and correct highway carriageway
+- Navigation instructions toward the next reachable charger
+- Add support for additional operators (e.g. Ionity)
+- Fetch and cache station data in background once a day
+- Improve UX on mobile (larger markers, better touch support)
+- Optional voice feedback when approaching a charger
