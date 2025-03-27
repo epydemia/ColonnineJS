@@ -107,11 +107,10 @@ function updateDistanceBar(stations) {
 
     const positionPercent = (distanza / 100) * 100;
     const marker = document.createElement("div");
-    marker.title = `${station.nome} (${station.distanza} km)`;
+    marker.innerHTML = `<span title="${station.nome}\nStalli: ${station.colonnine?.length ?? "?"}\nPotenza: ${station.colonnine?.[0]?.modello ?? "?"}">🔌</span>`;
     marker.style.position = "absolute";
     marker.style.left = `${positionPercent}%`;
     marker.style.top = "-6px";
-    marker.innerText = "🔌";
     marker.style.transform = "translateX(-50%)";
     marker.style.fontSize = "18px";
     bar.appendChild(marker);
