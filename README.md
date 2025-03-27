@@ -21,10 +21,11 @@ The main goal of this project is to build a location-aware web app that:
 
 ```
 ColonnineJS/
-├── index.html               # Main HTML structure
-├── styles.css               # Page styling
+├── index.html                 # Main HTML structure
+├── styles.css                 # Page styling and animations
 ├── js/
-│   └── geolocalizzazione.js # Geolocation logic + map + road detection
+│   ├── geolocalizzazione.js   # Geolocation logic, heading and map
+│   ├── colonnine.js           # Charger data loading, sorting, rendering
 ```
 
 ## 🌐 Usage
