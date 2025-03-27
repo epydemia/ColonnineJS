@@ -1,4 +1,4 @@
-const DEBUG_POS = false;
+const DEBUG_POS = true;
 
 document.addEventListener("DOMContentLoaded", () => {
     const coordsDiv = document.getElementById("coords");
