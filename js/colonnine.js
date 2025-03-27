@@ -1,3 +1,4 @@
+// Calcola la distanza in km tra due coordinate geografiche usando la formula dell'haversine
 function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
   const R = 6371; // Raggio della Terra in km
   const dLat = (lat2 - lat1) * Math.PI / 180;
@@ -10,6 +11,7 @@ function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
   return R * c;
 }
 
+// Esegue una richiesta reverse geocoding a Nominatim per ottenere il nome della strada da latitudine e longitudine
 async function getStradaFromLatLon(lat, lon) {
   const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&zoom=18&addressdetails=1`;
   try {
@@ -28,11 +30,14 @@ async function getStradaFromLatLon(lat, lon) {
   }
 }
 
+// Carica la lista delle colonnine da remoto, calcola la distanza da ciascuna rispetto alla posizione dell'utente,
+// ordina per distanza, mostra sulla mappa e nella tabella, e aggiorna la barra di distanza
 async function loadStations(userLat, userLon, map) {
   const res = await fetch('https://viabilita.autostrade.it/json/colonnine.json?1742906702332');
   const data = await res.json();
   const aree = data.listaAree || [];
 
+  // Crea un array preliminare di colonnine con distanza calcolata
   const preResults = aree.map(area => {
     const lat = parseFloat(area.lat);
     const lon = parseFloat(area.lon);
@@ -48,21 +53,26 @@ async function loadStations(userLat, userLon, map) {
     };
   });
 
+  // Ordina le colonnine per distanza crescente
   preResults.sort((a, b) => a.distanza - b.distanza);
   const showOnlyNearest = document.querySelector("#toggleNearest")?.checked;
+
+  // Applica il filtro per mostrare solo le 5 colonnine più vicine se la checkbox è attiva
   const filteredResults = showOnlyNearest ? preResults.slice(0, 5) : preResults;
 
   const results = [];
 
-  // Rimuove i vecchi marker dalla mappa
+  // Rimuove eventuali marker precedenti dalla mappa
   if (window.stationMarkers) {
     window.stationMarkers.forEach(m => map.removeLayer(m));
   }
   window.stationMarkers = [];
 
+  // Elabora ogni area di servizio e prepara i dati per la tabella e la mappa
   for (const area of filteredResults) {
     let strada = area.strada;
 
+    // Se il campo 'strada' è mancante, effettua una chiamata di reverse geocoding per ottenerlo
     if (typeof strada !== 'string' || strada.trim().length === 0) {
       const stradaReverse = await getStradaFromLatLon(area.lat, area.lon);
       strada = `${stradaReverse} *`;
@@ -71,6 +81,7 @@ async function loadStations(userLat, userLon, map) {
     const numStalli = area.colonnine?.length ?? "?";
     const potenza = area.colonnine?.[0]?.modello ?? "?";
 
+    // Salva i dati finali per questa stazione, includendo distanza formattata e informazioni utili
     results.push({
       ...area,
       distanza: area.distanza.toFixed(2),
@@ -82,6 +93,7 @@ async function loadStations(userLat, userLon, map) {
 
   const tbody = document.querySelector("#stations-table tbody");
   tbody.innerHTML = "";
+  // Popola la tabella HTML e crea i marker sulla mappa per ogni colonnina
   results.forEach(station => {
     const row = document.createElement("tr");
     row.innerHTML = `
@@ -101,12 +113,14 @@ async function loadStations(userLat, userLon, map) {
   updateDistanceBar(results);
 }
 
+// Aggiorna la barra orizzontale con i marker delle colonnine, in posizione proporzionale alla distanza (0–100 km)
 function updateDistanceBar(stations) {
   const bar = document.getElementById("distance-bar");
   if (!bar) return;
 
   bar.innerHTML = ""; // Pulisce i vecchi marker
 
+  // Aggiunge un'emoji 🔌 per ogni colonnina entro 100 km con tooltip informativo
   stations.forEach(station => {
     const distanza = parseFloat(station.distanza);
     if (isNaN(distanza) || distanza > 100) return;
@@ -123,7 +137,7 @@ function updateDistanceBar(stations) {
   });
 }
 
-// Aspetta che l'utente venga localizzato da geolocalizzazione.js
+// Attende che la mappa e la posizione utente siano pronte prima di caricare le colonnine
 window.addEventListener("load", () => {
   const interval = setInterval(() => {
     const map = window.leafletMap;
@@ -134,6 +148,7 @@ window.addEventListener("load", () => {
     }
   }, 500);
 
+  // Ricarica le colonnine se viene modificata l'opzione "Mostra solo le 5 più vicine"
   const toggle = document.querySelector("#toggleNearest");
   if (toggle) {
     toggle.addEventListener("change", () => {

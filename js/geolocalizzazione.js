@@ -1,3 +1,4 @@
+// Inizializza lo script solo dopo che il DOM è stato completamente caricato
 document.addEventListener("DOMContentLoaded", () => {
     const toggleDebug = document.getElementById("toggleDebug");
     let debugIntervalId = null;
@@ -5,12 +6,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const toggleNearest = document.getElementById("toggleNearest");
     let userMarker = null;
 
+    // Converte un angolo in gradi in una direzione cardinale testuale (es. "Nord", "Est", ...)
     function getCardinalDirection(angle) {
         const directions = ["Nord", "Nord-Est", "Est", "Sud-Est", "Sud", "Sud-Ovest", "Ovest", "Nord-Ovest"];
         const index = Math.round(((angle % 360) / 45)) % 8;
         return directions[index];
     }
 
+    // Calcola il bearing (angolo) tra due coordinate GPS in gradi, secondo lo standard geografico:
+    // 0° = Nord, 90° = Est, 180° = Sud, 270° = Ovest
     function calcolaAngoloTraDuePunti(lat1, lon1, lat2, lon2) {
         const toRad = deg => deg * Math.PI / 180;
         const toDeg = rad => rad * 180 / Math.PI;
@@ -29,6 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return (brng + 360) % 360;
     }
 
+    // Esegue una richiesta reverse geocoding a Nominatim (OpenStreetMap) per ottenere il nome della strada attuale
     function reverseGeocode(lat, lon) {
         fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`)
             .then(response => response.json())
@@ -82,22 +87,41 @@ document.addEventListener("DOMContentLoaded", () => {
                 const { lat, lon } = debugCoords[index];
                 index = (index + 1) % debugCoords.length;
 
+                // Aggiorna il testo dell'interfaccia con le coordinate attuali
                 coordsDiv.innerText = `Latitudine: ${lat}\nLongitudine: ${lon}`;
+                // Salva le coordinate GPS correnti come globali
                 window.userCoordinates = { lat, lon };
                 reverseGeocode(lat, lon);
 
-                const angle = window.lastUserCoordinates
-                    ? (calcolaAngoloTraDuePunti(window.lastUserCoordinates.lat, window.lastUserCoordinates.lon, lat, lon) - 90)
-                    : -90;
+                // Prepara variabili per calcolare la direzione di marcia (heading) e controllare se aggiornarla
+                let angle = -90;
+                let aggiornaHeading = true;
 
-                window.userHeading = (angle + 90 + 360) % 360;
-                window.lastUserCoordinates = { lat, lon };
+                // Ottiene e visualizza il nome della strada attuale tramite reverse geocoding
+                // Aggiorna la direzione di marcia solo se lo spostamento è superiore a 10 metri
+                // Questo evita cambi di direzione dovuti a rumore GPS o piccoli movimenti
+                if (window.lastUserCoordinates) {
+                    const distanza = getDistanceFromLatLonInKm(window.lastUserCoordinates.lat, window.lastUserCoordinates.lon, lat, lon);
+                    if (distanza * 1000 < 10) {
+                        aggiornaHeading = false;
+                    } else {
+                        angle = calcolaAngoloTraDuePunti(window.lastUserCoordinates.lat, window.lastUserCoordinates.lon, lat, lon) - 90;
+                    }
+                }
 
+                // Se il movimento è sufficiente, aggiorna la direzione di marcia e memorizza la nuova posizione
+                if (aggiornaHeading) {
+                    window.userHeading = (angle + 90 + 360) % 360;
+                    window.lastUserCoordinates = { lat, lon };
+                }
+
+                // Mostra nella UI l'heading in gradi e come direzione testuale (es. "Sud-Ovest")
                 const direzioneDiv = document.getElementById("direzione");
                 if (direzioneDiv) {
                     direzioneDiv.innerText = `🧭 Heading: ${window.userHeading.toFixed(0)}° (${getCardinalDirection(window.userHeading)})`;
                 }
 
+                // Definisce un'icona triangolare orientata secondo la direzione di marcia per rappresentare l'utente sulla mappa
                 const userIcon = L.divIcon({
                     className: 'navigation-arrow-icon',
                     html: `<div style="transform: rotate(${angle}deg); width: 0; height: 0;
@@ -108,6 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     iconAnchor: [10, 10]
                 });
 
+                // Se la mappa non è ancora inizializzata, la crea e la centra sulla posizione attuale
                 if (!window.leafletMap) {
                     const map = L.map('map').setView([lat, lon], 15);
                     window.leafletMap = map;
@@ -117,6 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     }).addTo(map);
                 }
 
+                // Crea o aggiorna il marker dell'utente sulla mappa con la nuova posizione e direzione
                 if (!userMarker) {
                     userMarker = L.marker([lat, lon], { icon: userIcon }).addTo(window.leafletMap).bindPopup('📍 Sei qui');
                 } else {
@@ -131,22 +157,41 @@ document.addEventListener("DOMContentLoaded", () => {
                     const lat = parseFloat(position.coords.latitude.toFixed(6));
                     const lon = parseFloat(position.coords.longitude.toFixed(6));
 
+                    // Aggiorna il testo dell'interfaccia con le coordinate attuali
                     coordsDiv.innerText = `Latitudine: ${lat}\nLongitudine: ${lon}`;
+                    // Salva le coordinate GPS correnti come globali
                     window.userCoordinates = { lat, lon };
                     reverseGeocode(lat, lon);
 
-                    const angle = window.lastUserCoordinates
-                        ? (calcolaAngoloTraDuePunti(window.lastUserCoordinates.lat, window.lastUserCoordinates.lon, lat, lon) - 90)
-                        : -90;
+                    // Prepara variabili per calcolare la direzione di marcia (heading) e controllare se aggiornarla
+                    let angle = -90;
+                    let aggiornaHeading = true;
 
-                    window.userHeading = (angle + 90 + 360) % 360;
-                    window.lastUserCoordinates = { lat, lon };
+                    // Ottiene e visualizza il nome della strada attuale tramite reverse geocoding
+                    // Aggiorna la direzione di marcia solo se lo spostamento è superiore a 10 metri
+                    // Questo evita cambi di direzione dovuti a rumore GPS o piccoli movimenti
+                    if (window.lastUserCoordinates) {
+                        const distanza = getDistanceFromLatLonInKm(window.lastUserCoordinates.lat, window.lastUserCoordinates.lon, lat, lon);
+                        if (distanza * 1000 < 10) {
+                            aggiornaHeading = false;
+                        } else {
+                            angle = calcolaAngoloTraDuePunti(window.lastUserCoordinates.lat, window.lastUserCoordinates.lon, lat, lon) - 90;
+                        }
+                    }
 
+                    // Se il movimento è sufficiente, aggiorna la direzione di marcia e memorizza la nuova posizione
+                    if (aggiornaHeading) {
+                        window.userHeading = (angle + 90 + 360) % 360;
+                        window.lastUserCoordinates = { lat, lon };
+                    }
+
+                    // Mostra nella UI l'heading in gradi e come direzione testuale (es. "Sud-Ovest")
                     const direzioneDiv = document.getElementById("direzione");
                     if (direzioneDiv) {
                         direzioneDiv.innerText = `🧭 Heading: ${window.userHeading.toFixed(0)}° (${getCardinalDirection(window.userHeading)})`;
                     }
 
+                    // Definisce un'icona triangolare orientata secondo la direzione di marcia per rappresentare l'utente sulla mappa
                     const userIcon = L.divIcon({
                         className: 'navigation-arrow-icon',
                         html: `<div style="transform: rotate(${angle}deg); width: 0; height: 0;
@@ -157,6 +202,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         iconAnchor: [10, 10]
                     });
 
+                    // Se la mappa non è ancora inizializzata, la crea e la centra sulla posizione attuale
                     if (!window.leafletMap) {
                         const map = L.map('map').setView([lat, lon], 15);
                         window.leafletMap = map;
@@ -167,6 +213,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                         userMarker = L.marker([lat, lon], { icon: userIcon }).addTo(map).bindPopup('📍 Sei qui').openPopup();
                     } else {
+                        // Crea o aggiorna il marker dell'utente sulla mappa con la nuova posizione e direzione
                         if (userMarker) {
                             userMarker.setLatLng([lat, lon]);
                             userMarker.setIcon(userIcon);
@@ -175,6 +222,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         }
                     }
 
+                    // Centra la vista della mappa sulla nuova posizione dell'utente
                     window.leafletMap.setView([lat, lon]);
                 },
                 (error) => {
