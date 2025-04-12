@@ -55,6 +55,7 @@ async function loadStations(userLat, userLon, map) {
     dataTest = { listaAree: [] }; // Fallback a un array vuoto
   }
 
+  // Combina le aree caricate dai due file JSON
   const aree = [...dataFreeToX.listaAree, ...dataTest.listaAree];
 
   // Crea un array preliminare di colonnine con distanza calcolata
@@ -130,6 +131,7 @@ async function loadStations(userLat, userLon, map) {
     window.stationMarkers.push(marker);
   });
 
+  // Aggiorna la barra di distanza con i risultati finali
   updateDistanceBar(results);
 }
 

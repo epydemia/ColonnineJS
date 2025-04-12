@@ -41,21 +41,23 @@ document.addEventListener("DOMContentLoaded", () => {
                 const strada = data.address?.road || data.display_name || "Strada non trovata";
                 const stradaDiv = document.getElementById("strada");
                 if (stradaDiv) {
-                    stradaDiv.innerText = `🛣️ ${strada}`;
+                    stradaDiv.innerText = `🛣️ ${strada}`; // Mostra il nome della strada nella UI
                 }
             })
             .catch(err => {
-                console.warn("Reverse geocoding fallito:", err);
+                console.warn("Reverse geocoding fallito:", err); // Gestione degli errori
             });
     }
 
+    // Inizializza la geolocalizzazione, in modalità debug o reale
     function initGeolocation(debug) {
         if (debugIntervalId) {
-            clearInterval(debugIntervalId);
+            clearInterval(debugIntervalId); // Ferma l'intervallo di debug se esiste
             debugIntervalId = null;
         }
 
         if (debug) {
+            // Modalità debug: usa coordinate simulate
             const debugCoords = [
                 { lat: 41.638756, lon: 15.453696 },
                 { lat: 41.64647, lon: 15.446288 },
@@ -84,18 +86,18 @@ document.addEventListener("DOMContentLoaded", () => {
             let index = 0;
 
             debugIntervalId = setInterval(() => {
-                const { lat, lon } = debugCoords[index];
-                index = (index + 1) % debugCoords.length;
+                const { lat, lon } = debugCoords[index]; // Ottieni le coordinate simulate
+                index = (index + 1) % debugCoords.length; // Aggiorna l'indice per la prossima coordinata
 
                 // Aggiorna il testo dell'interfaccia con le coordinate attuali
                 coordsDiv.innerText = `Latitudine: ${lat}\nLongitudine: ${lon}`;
                 // Salva le coordinate GPS correnti come globali
                 window.userCoordinates = { lat, lon };
-                reverseGeocode(lat, lon);
+                reverseGeocode(lat, lon); // Esegui il reverse geocoding
 
                 // Prepara variabili per calcolare la direzione di marcia (heading) e controllare se aggiornarla
-                let angle = -90;
-                let aggiornaHeading = true;
+                let angle = -90; // Angolo iniziale
+                let aggiornaHeading = true; // Flag per aggiornare la direzione
 
                 // Ottiene e visualizza il nome della strada attuale tramite reverse geocoding
                 // Aggiorna la direzione di marcia solo se lo spostamento è superiore a 10 metri
@@ -103,22 +105,22 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (window.lastUserCoordinates) {
                     const distanza = getDistanceFromLatLonInKm(window.lastUserCoordinates.lat, window.lastUserCoordinates.lon, lat, lon);
                     if (distanza * 1000 < 10) {
-                        aggiornaHeading = false;
+                        aggiornaHeading = false; // Non aggiornare se la distanza è inferiore a 10 metri
                     } else {
-                        angle = calcolaAngoloTraDuePunti(window.lastUserCoordinates.lat, window.lastUserCoordinates.lon, lat, lon) - 90;
+                        angle = calcolaAngoloTraDuePunti(window.lastUserCoordinates.lat, window.lastUserCoordinates.lon, lat, lon) - 90; // Calcola il nuovo angolo
                     }
                 }
 
                 // Se il movimento è sufficiente, aggiorna la direzione di marcia e memorizza la nuova posizione
                 if (aggiornaHeading) {
-                    window.userHeading = (angle + 90 + 360) % 360;
-                    window.lastUserCoordinates = { lat, lon };
+                    window.userHeading = (angle + 90 + 360) % 360; // Aggiorna l'heading dell'utente
+                    window.lastUserCoordinates = { lat, lon }; // Memorizza le ultime coordinate
                 }
 
                 // Mostra nella UI l'heading in gradi e come direzione testuale (es. "Sud-Ovest")
                 const direzioneDiv = document.getElementById("direzione");
                 if (direzioneDiv) {
-                    direzioneDiv.innerText = `🧭 Heading: ${window.userHeading.toFixed(0)}° (${getCardinalDirection(window.userHeading)})`;
+                    direzioneDiv.innerText = `🧭 Heading: ${window.userHeading.toFixed(0)}° (${getCardinalDirection(window.userHeading)})`; // Mostra l'heading
                 }
 
                 // Definisce un'icona triangolare orientata secondo la direzione di marcia per rappresentare l'utente sulla mappa
@@ -134,42 +136,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 // Se la mappa non è ancora inizializzata, la crea e la centra sulla posizione attuale
                 if (!window.leafletMap) {
-                    const map = L.map('map').setView([lat, lon], 15);
+                    const map = L.map('map').setView([lat, lon], 15); // Inizializza la mappa
                     window.leafletMap = map;
 
                     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                         attribution: '&copy; OpenStreetMap contributors'
-                    }).addTo(map);
+                    }).addTo(map); // Aggiungi il layer della mappa
                 }
 
                 // Crea o aggiorna il marker dell'utente sulla mappa con la nuova posizione e direzione
                 if (!userMarker) {
-                    userMarker = L.marker([lat, lon], { icon: userIcon }).addTo(window.leafletMap).bindPopup('📍 Sei qui');
+                    userMarker = L.marker([lat, lon], { icon: userIcon }).addTo(window.leafletMap).bindPopup('📍 Sei qui'); // Aggiungi il marker
                 } else {
-                    userMarker.setLatLng([lat, lon]);
-                    userMarker.setIcon(userIcon);
+                    userMarker.setLatLng([lat, lon]); // Aggiorna la posizione del marker
+                    userMarker.setIcon(userIcon); // Aggiorna l'icona del marker
                 }
 
             }, 3000);
         } else if ("geolocation" in navigator) {
+            // Modalità reale: utilizza le API di geolocalizzazione del browser
             navigator.geolocation.watchPosition(
                 (position) => {
-                    const lat = parseFloat(position.coords.latitude.toFixed(6));
-                    const lon = parseFloat(position.coords.longitude.toFixed(6));
+                    const lat = parseFloat(position.coords.latitude.toFixed(6)); // Ottieni la latitudine
+                    const lon = parseFloat(position.coords.longitude.toFixed(6)); // Ottieni la longitudine
 
                     // Aggiorna il testo dell'interfaccia con le coordinate attuali
                     coordsDiv.innerText = `Latitudine: ${lat}\nLongitudine: ${lon}`;
                     // Salva le coordinate GPS correnti come globali
                     window.userCoordinates = { lat, lon };
-                    reverseGeocode(lat, lon);
+                    reverseGeocode(lat, lon); // Esegui il reverse geocoding
 
                     // Prepara variabili per calcolare la direzione di marcia (heading) e controllare se aggiornarla
-                    let angle = -90;
-                    let aggiornaHeading = true;
+                    let angle = -90; // Angolo iniziale
+                    let aggiornaHeading = true; // Flag per aggiornare la direzione
 
                     // Se il browser fornisce un heading nativo, usalo
                     if (position.coords.heading !== null && !isNaN(position.coords.heading)) {
-                        window.userHeading = position.coords.heading;
+                        window.userHeading = position.coords.heading; // Usa l'heading fornito dal GPS
                         aggiornaHeading = false; // non sovrascrivere con angolo calcolato
                     }
 
@@ -179,22 +182,22 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (window.lastUserCoordinates) {
                         const distanza = getDistanceFromLatLonInKm(window.lastUserCoordinates.lat, window.lastUserCoordinates.lon, lat, lon);
                         if (distanza * 1000 < 10) {
-                            aggiornaHeading = false;
+                            aggiornaHeading = false; // Non aggiornare se la distanza è inferiore a 10 metri
                         } else {
-                            angle = calcolaAngoloTraDuePunti(window.lastUserCoordinates.lat, window.lastUserCoordinates.lon, lat, lon) - 90;
+                            angle = calcolaAngoloTraDuePunti(window.lastUserCoordinates.lat, window.lastUserCoordinates.lon, lat, lon) - 90; // Calcola il nuovo angolo
                         }
                     }
 
                     // Se il movimento è sufficiente, aggiorna la direzione di marcia e memorizza la nuova posizione
                     if (aggiornaHeading) {
-                        window.userHeading = (angle + 90 + 360) % 360;
-                        window.lastUserCoordinates = { lat, lon };
+                        window.userHeading = (angle + 90 + 360) % 360; // Aggiorna l'heading dell'utente
+                        window.lastUserCoordinates = { lat, lon }; // Memorizza le ultime coordinate
                     }
 
                     // Mostra nella UI l'heading in gradi e come direzione testuale (es. "Sud-Ovest")
                     const direzioneDiv = document.getElementById("direzione");
                     if (direzioneDiv) {
-                        direzioneDiv.innerText = `🧭 Heading: ${window.userHeading.toFixed(0)}° (${getCardinalDirection(window.userHeading)})`;
+                        direzioneDiv.innerText = `🧭 Heading: ${window.userHeading.toFixed(0)}° (${getCardinalDirection(window.userHeading)})`; // Mostra l'heading
                     }
 
                     // Definisce un'icona triangolare orientata secondo la direzione di marcia per rappresentare l'utente sulla mappa
@@ -210,21 +213,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     // Se la mappa non è ancora inizializzata, la crea e la centra sulla posizione attuale
                     if (!window.leafletMap) {
-                        const map = L.map('map').setView([lat, lon], 15);
+                        const map = L.map('map').setView([lat, lon], 15); // Inizializza la mappa
                         window.leafletMap = map;
 
                         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                             attribution: '&copy; OpenStreetMap contributors'
-                        }).addTo(map);
+                        }).addTo(map); // Aggiungi il layer della mappa
 
-                        userMarker = L.marker([lat, lon], { icon: userIcon }).addTo(map).bindPopup('📍 Sei qui').openPopup();
+                        userMarker = L.marker([lat, lon], { icon: userIcon }).addTo(map).bindPopup('📍 Sei qui').openPopup(); // Aggiungi il marker iniziale
                     } else {
                         // Crea o aggiorna il marker dell'utente sulla mappa con la nuova posizione e direzione
                         if (userMarker) {
-                            userMarker.setLatLng([lat, lon]);
-                            userMarker.setIcon(userIcon);
+                            userMarker.setLatLng([lat, lon]); // Aggiorna la posizione del marker
+                            userMarker.setIcon(userIcon); // Aggiorna l'icona del marker
                         } else {
-                            userMarker = L.marker([lat, lon], { icon: userIcon }).addTo(window.leafletMap).bindPopup('📍 Sei qui');
+                            userMarker = L.marker([lat, lon], { icon: userIcon }).addTo(window.leafletMap).bindPopup('📍 Sei qui'); // Aggiungi il marker se non esiste
                         }
                     }
 
@@ -232,7 +235,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     window.leafletMap.setView([lat, lon]);
                 },
                 (error) => {
-                    coordsDiv.innerText = `Errore: ${error.message}`;
+                    coordsDiv.innerText = `Errore: ${error.message}`; // Mostra un messaggio di errore in caso di fallimento
                 },
                 {
                     enableHighAccuracy: true,
@@ -241,14 +244,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             );
         } else {
-            coordsDiv.innerText = "⚠️ Geolocalizzazione non supportata dal browser.";
+            coordsDiv.innerText = "⚠️ Geolocalizzazione non supportata dal browser."; // Messaggio per browser non supportati
         }
     }
 
-    initGeolocation(toggleDebug?.checked);
+    initGeolocation(toggleDebug?.checked); // Inizializza la geolocalizzazione con il valore di debug
 
     toggleDebug?.addEventListener('change', () => {
-        initGeolocation(toggleDebug.checked);
+        initGeolocation(toggleDebug.checked); // Ri-inizializza la geolocalizzazione quando cambia il toggle
     });
 
     toggleNearest.addEventListener('change', () => {
