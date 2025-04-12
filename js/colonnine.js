@@ -30,27 +30,32 @@ async function getStradaFromLatLon(lat, lon) {
   }
 }
 
-// Carica la lista delle colonnine da remoto o da un file locale, calcola la distanza da ciascuna rispetto alla posizione dell'utente,
+// Carica la lista delle colonnine da due file JSON locali, calcola la distanza da ciascuna rispetto alla posizione dell'utente,
 // ordina per distanza, mostra sulla mappa e nella tabella, e aggiorna la barra di distanza
 async function loadStations(userLat, userLon, map) {
-  let data;
-  try {
-    // Caricamento del file JSON locale
-    const res = await fetch('./data/free_to_x.json');
-    if (!res.ok) throw new Error("Errore nel caricamento del file locale delle colonnine");
-    data = await res.json();
-  } catch (err) {
-    console.error("❌ Errore nel caricamento del file locale:", err);
+  let dataFreeToX, dataTest;
 
-    // Codice per caricare il file da autostrade.it (commentato per ora)
-    /*
-    const res = await fetch('https://viabilita.autostrade.it/json/colonnine.json?1742906702332');
-    if (!res.ok) throw new Error("Errore nel caricamento del file remoto delle colonnine");
-    data = await res.json();
-    */
+  try {
+    // Caricamento del file JSON free_to_x.json
+    const resFreeToX = await fetch('./data/free_to_x.json');
+    if (!resFreeToX.ok) throw new Error("Errore nel caricamento del file free_to_x.json");
+    dataFreeToX = await resFreeToX.json();
+  } catch (err) {
+    console.error("❌ Errore nel caricamento del file free_to_x.json:", err);
+    dataFreeToX = { listaAree: [] }; // Fallback a un array vuoto
   }
 
-  const aree = data.listaAree || [];
+  try {
+    // Caricamento del file JSON test.json
+    const resTest = await fetch('./data/test.json');
+    if (!resTest.ok) throw new Error("Errore nel caricamento del file test.json");
+    dataTest = await resTest.json();
+  } catch (err) {
+    console.error("❌ Errore nel caricamento del file test.json:", err);
+    dataTest = { listaAree: [] }; // Fallback a un array vuoto
+  }
+
+  const aree = [...dataFreeToX.listaAree, ...dataTest.listaAree];
 
   // Crea un array preliminare di colonnine con distanza calcolata
   const preResults = aree.map(area => {

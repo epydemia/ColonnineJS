@@ -1,0 +1,77 @@
+{
+    "listaAree": [
+        {
+            "codice": "TEST",
+            "c_ads": "TEST",
+            "nome": "ST-WENDEL-STR SWM",
+            "strada": "ST-WENDEL-STR",
+            "direzione": "MUNCHEN",
+            "traE": "",
+            "lon": 11.534945682719732,
+            "lat": 48.09106330260695,
+            "radius": 5,
+            "km": 0,
+            "isAds": false,
+            "colonnine": [
+                {
+                    "codice": "F2XITM3001",
+                    "modello": "HPC 300 kW",
+                    "codiceModello": 1,
+                    "dataInizioLavori": 1686866400000,
+                    "dataAttivazione": 1701817200000,
+                    "connettori": [
+                        {
+                            "codice": "IT*F2X*EF2XITM3001*1",
+                            "modello": "CCS Ricarica DC",
+                            "codiceModello": 11
+                        },
+                        {
+                            "codice": "IT*F2X*EF2XITM3001*2",
+                            "modello": "CCS Ricarica DC",
+                            "codiceModello": 11
+                        }
+                    ]
+                },
+                {
+                    "codice": "F2XITM3002",
+                    "modello": "HPC 300 kW",
+                    "codiceModello": 1,
+                    "dataInizioLavori": 1686866400000,
+                    "dataAttivazione": 1701817200000,
+                    "connettori": [
+                        {
+                            "codice": "IT*F2X*EF2XITM3002*1",
+                            "modello": "CCS Ricarica DC",
+                            "codiceModello": 11
+                        },
+                        {
+                            "codice": "IT*F2X*EF2XITM3002*2",
+                            "modello": "CCS Ricarica DC",
+                            "codiceModello": 11
+                        }
+                    ]
+                },
+                {
+                    "codice": "F2XITM3051",
+                    "modello": "Fast Charging 64 kW",
+                    "codiceModello": 3,
+                    "dataInizioLavori": 1686866400000,
+                    "dataAttivazione": 1701817200000,
+                    "connettori": [
+                        {
+                            "codice": "IT*F2X*EF2XITM3051*1",
+                            "modello": "CCS Ricarica DC",
+                            "codiceModello": 11
+                        },
+                        {
+                            "codice": "IT*F2X*EF2XITM3051*2",
+                            "modello": "CHAdeMO Ricarica DC",
+                            "codiceModello": 12
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+
