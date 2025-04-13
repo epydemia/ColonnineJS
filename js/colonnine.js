@@ -11,6 +11,25 @@ function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
   return R * c;
 }
 
+function calcolaAngoloTraDuePunti(lat1, lon1, lat2, lon2) {
+  const toRad = deg => deg * Math.PI / 180;
+  const toDeg = rad => rad * 180 / Math.PI;
+
+  const dLon = toRad(lon2 - lon1);
+  lat1 = toRad(lat1);
+  lat2 = toRad(lat2);
+
+  const y = Math.sin(dLon) * Math.cos(lat2);
+  const x = Math.cos(lat1) * Math.sin(lat2) -
+            Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLon);
+
+  let brng = Math.atan2(y, x);
+  brng = toDeg(brng);
+  return (brng + 360) % 360;
+}
+
+let cachedAree = null;
+
 // Esegue una richiesta reverse geocoding a Nominatim per ottenere il nome della strada da latitudine e longitudine
 async function getStradaFromLatLon(lat, lon) {
   const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&zoom=18&addressdetails=1`;
@@ -33,30 +52,30 @@ async function getStradaFromLatLon(lat, lon) {
 // Carica la lista delle colonnine da due file JSON locali, calcola la distanza da ciascuna rispetto alla posizione dell'utente,
 // ordina per distanza, mostra sulla mappa e nella tabella, e aggiorna la barra di distanza
 async function loadStations(userLat, userLon, map) {
-  let dataFreeToX, dataTest;
+  if (!cachedAree) {
+    let dataFreeToX = { listaAree: [] };
+    let dataTest = { listaAree: [] };
 
-  try {
-    // Caricamento del file JSON free_to_x.json
-    const resFreeToX = await fetch('./data/free_to_x.json');
-    if (!resFreeToX.ok) throw new Error("Errore nel caricamento del file free_to_x.json");
-    dataFreeToX = await resFreeToX.json();
-  } catch (err) {
-    console.error("❌ Errore nel caricamento del file free_to_x.json:", err);
-    dataFreeToX = { listaAree: [] }; // Fallback a un array vuoto
+    try {
+      const resFreeToX = await fetch('./data/free_to_x.json');
+      if (!resFreeToX.ok) throw new Error("Errore nel caricamento del file free_to_x.json");
+      dataFreeToX = await resFreeToX.json();
+    } catch (err) {
+      console.error("❌ Errore nel caricamento del file free_to_x.json:", err);
+    }
+
+    try {
+      const resTest = await fetch('./data/test.json');
+      if (!resTest.ok) throw new Error("Errore nel caricamento del file test.json");
+      dataTest = await resTest.json();
+    } catch (err) {
+      console.error("❌ Errore nel caricamento del file test.json:", err);
+    }
+
+    cachedAree = [...dataFreeToX.listaAree, ...dataTest.listaAree];
   }
 
-  try {
-    // Caricamento del file JSON test.json
-    const resTest = await fetch('./data/test.json');
-    if (!resTest.ok) throw new Error("Errore nel caricamento del file test.json");
-    dataTest = await resTest.json();
-  } catch (err) {
-    console.error("❌ Errore nel caricamento del file test.json:", err);
-    dataTest = { listaAree: [] }; // Fallback a un array vuoto
-  }
-
-  // Combina le aree caricate dai due file JSON
-  const aree = [...dataFreeToX.listaAree, ...dataTest.listaAree];
+  const aree = cachedAree;
 
   // Crea un array preliminare di colonnine con distanza calcolata
   const preResults = aree.map(area => {
@@ -126,7 +145,23 @@ async function loadStations(userLat, userLon, map) {
     `;
     tbody.appendChild(row);
 
-    const marker = L.marker([station.lat, station.lon]).addTo(map)
+    const angolo = calcolaAngoloTraDuePunti(userLat, userLon, station.lat, station.lon);
+    const differenza = Math.abs((angolo - window.userHeading + 360) % 360);
+    const isAvanti = differenza < 60 || differenza > 300;
+
+    const markerIcon = L.divIcon({
+      className: 'custom-marker',
+      html: `<div style="
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background-color: ${isAvanti ? 'red' : 'gray'};
+        border: 2px solid white;"></div>`,
+      iconSize: [14, 14],
+      iconAnchor: [7, 7]
+    });
+
+    const marker = L.marker([station.lat, station.lon], { icon: markerIcon }).addTo(map)
       .bindPopup(`<strong>${station.nome}</strong><br>${station.strada}<br>${station.distanza} km`);
     window.stationMarkers.push(marker);
   });
@@ -176,5 +211,26 @@ window.addEventListener("load", () => {
     toggle.addEventListener("change", () => {
       loadStations(window.userCoordinates.lat, window.userCoordinates.lon, window.leafletMap);
     });
+  }
+
+  if ("geolocation" in navigator) {
+    navigator.geolocation.watchPosition(
+      (position) => {
+        const lat = parseFloat(position.coords.latitude.toFixed(6));
+        const lon = parseFloat(position.coords.longitude.toFixed(6));
+        if (!window.userCoordinates || lat !== window.userCoordinates.lat || lon !== window.userCoordinates.lon) {
+          window.userCoordinates = { lat, lon };
+          loadStations(lat, lon, window.leafletMap);
+        }
+      },
+      (error) => {
+        console.warn("Errore nella geolocalizzazione continua:", error);
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 0
+      }
+    );
   }
 });
