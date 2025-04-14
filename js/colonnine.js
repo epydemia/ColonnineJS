@@ -7,6 +7,29 @@ function getStradaAutostrada(strada) {
 
 let cachedAree = null;
 
+async function caricaAreeDaJson() {
+  let dataFreeToX = { listaAree: [] };
+  let dataTest = { listaAree: [] };
+
+  try {
+    const resFreeToX = await fetch('./data/free_to_x_reverse.json');
+    if (!resFreeToX.ok) throw new Error("Errore nel caricamento del file free_to_x_reverse.json");
+    dataFreeToX = await resFreeToX.json();
+  } catch (err) {
+    console.error("❌ Errore nel caricamento del file free_to_x_reverse.json:", err);
+  }
+
+  try {
+    const resTest = await fetch('./data/test.json');
+    if (!resTest.ok) throw new Error("Errore nel caricamento del file test.json");
+    dataTest = await resTest.json();
+  } catch (err) {
+    console.error("❌ Errore nel caricamento del file test.json:", err);
+  }
+
+  return [...dataFreeToX.listaAree, ...dataTest.listaAree];
+}
+
 // Esegue una richiesta reverse geocoding a Nominatim per ottenere il nome della strada da latitudine e longitudine
 async function getStradaFromLatLon(lat, lon) {
   const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&zoom=18&addressdetails=1`;
@@ -30,26 +53,7 @@ async function getStradaFromLatLon(lat, lon) {
 // ordina per distanza, mostra sulla mappa e nella tabella, e aggiorna la barra di distanza
 export async function loadStations(userLat, userLon, map) {
   if (!cachedAree) {
-    let dataFreeToX = { listaAree: [] };
-    let dataTest = { listaAree: [] };
-
-    try {
-      const resFreeToX = await fetch('./data/free_to_x_reverse.json');
-      if (!resFreeToX.ok) throw new Error("Errore nel caricamento del file free_to_x_reverse.json");
-      dataFreeToX = await resFreeToX.json();
-    } catch (err) {
-      console.error("❌ Errore nel caricamento del file free_to_x_reverse.json:", err);
-    }
-
-    try {
-      const resTest = await fetch('./data/test.json');
-      if (!resTest.ok) throw new Error("Errore nel caricamento del file test.json");
-      dataTest = await resTest.json();
-    } catch (err) {
-      console.error("❌ Errore nel caricamento del file test.json:", err);
-    }
-
-    cachedAree = [...dataFreeToX.listaAree, ...dataTest.listaAree];
+    cachedAree = await caricaAreeDaJson();
   }
 
   const aree = cachedAree;
