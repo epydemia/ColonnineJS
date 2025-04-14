@@ -28,6 +28,18 @@ function calcolaAngoloTraDuePunti(lat1, lon1, lat2, lon2) {
   return (brng + 360) % 360;
 }
 
+function getDirezioneUtente(heading) {
+  if (heading >= 315 || heading < 45) return "NORD";
+  if (heading >= 45 && heading < 135) return "EST";
+  if (heading >= 135 && heading < 225) return "SUD";
+  return "OVEST";
+}
+
+function getStradaAutostrada(strada) {
+  const match = strada.match(/A\d+/);
+  return match ? match[0] : null;
+}
+
 let cachedAree = null;
 
 // Esegue una richiesta reverse geocoding a Nominatim per ottenere il nome della strada da latitudine e longitudine
@@ -57,11 +69,11 @@ async function loadStations(userLat, userLon, map) {
     let dataTest = { listaAree: [] };
 
     try {
-      const resFreeToX = await fetch('./data/free_to_x.json');
-      if (!resFreeToX.ok) throw new Error("Errore nel caricamento del file free_to_x.json");
+      const resFreeToX = await fetch('./data/free_to_x_reverse.json');
+      if (!resFreeToX.ok) throw new Error("Errore nel caricamento del file free_to_x_reverse.json");
       dataFreeToX = await resFreeToX.json();
     } catch (err) {
-      console.error("❌ Errore nel caricamento del file free_to_x.json:", err);
+      console.error("❌ Errore nel caricamento del file free_to_x_reverse.json:", err);
     }
 
     try {
@@ -76,6 +88,12 @@ async function loadStations(userLat, userLon, map) {
   }
 
   const aree = cachedAree;
+  const stradaUtente = await getStradaFromLatLon(userLat, userLon);
+  const codiceAutostrada = getStradaAutostrada(stradaUtente);
+  const direzioneUtente = getDirezioneUtente(window.userHeading);
+
+  const normalizza = s => s?.split(",")[0].trim().toLowerCase();
+  const stradaUtenteNorm = normalizza(stradaUtente);
 
   // Crea un array preliminare di colonnine con distanza calcolata
   const preResults = aree.map(area => {
@@ -83,6 +101,12 @@ async function loadStations(userLat, userLon, map) {
     const lon = parseFloat(area.lon);
     const distanzaRaw = getDistanceFromLatLonInKm(userLat, userLon, lat, lon);
     const distanza = typeof distanzaRaw === 'number' && !isNaN(distanzaRaw) ? distanzaRaw : Number.POSITIVE_INFINITY;
+
+    const stradaAreaNorm = normalizza(area.stradaReverse);
+    const stradaCompatibile = stradaUtenteNorm && stradaAreaNorm && stradaUtenteNorm === stradaAreaNorm;
+    const direzioneCompatibile = area.direzione?.toUpperCase() === direzioneUtente;
+    if (!direzioneCompatibile || distanza > 100) return null;
+
     return {
       nome: area.nome,
       strada: area.strada,
@@ -91,7 +115,7 @@ async function loadStations(userLat, userLon, map) {
       distanza,
       colonnine: area.colonnine // Aggiunto per estrarre colonnine
     };
-  });
+  }).filter(Boolean);
 
   // Ordina le colonnine per distanza crescente
   preResults.sort((a, b) => a.distanza - b.distanza);
