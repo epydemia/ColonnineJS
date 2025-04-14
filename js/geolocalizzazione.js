@@ -93,6 +93,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 coordsDiv.innerText = `Latitudine: ${lat}\nLongitudine: ${lon}`;
                 // Salva le coordinate GPS correnti come globali
                 window.userCoordinates = { lat, lon };
+                if (window.leafletMap) {
+                    loadStations(lat, lon, window.leafletMap);
+                }
                 reverseGeocode(lat, lon); // Esegui il reverse geocoding
 
                 // Prepara variabili per calcolare la direzione di marcia (heading) e controllare se aggiornarla
@@ -164,6 +167,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     coordsDiv.innerText = `Latitudine: ${lat}\nLongitudine: ${lon}`;
                     // Salva le coordinate GPS correnti come globali
                     window.userCoordinates = { lat, lon };
+                    if (window.leafletMap) {
+                        loadStations(lat, lon, window.leafletMap);
+                    }
                     reverseGeocode(lat, lon); // Esegui il reverse geocoding
 
                     // Prepara variabili per calcolare la direzione di marcia (heading) e controllare se aggiornarla
@@ -247,6 +253,7 @@ document.addEventListener("DOMContentLoaded", () => {
             coordsDiv.innerText = "⚠️ Geolocalizzazione non supportata dal browser."; // Messaggio per browser non supportati
         }
     }
+
 
     initGeolocation(toggleDebug?.checked); // Inizializza la geolocalizzazione con il valore di debug
 

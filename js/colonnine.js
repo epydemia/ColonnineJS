@@ -177,14 +177,20 @@ function updateDistanceBar(stations) {
 
   bar.innerHTML = ""; // Pulisce i vecchi marker
 
+  const filteredStations = stations.filter(station => {
+    const angolo = calcolaAngoloTraDuePunti(window.userCoordinates.lat, window.userCoordinates.lon, station.lat, station.lon);
+    const differenza = Math.abs((angolo - window.userHeading + 360) % 360);
+    return differenza < 60 || differenza > 300;
+  });
+
   // Aggiunge un'emoji 🔌 per ogni colonnina entro 100 km con tooltip informativo
-  stations.forEach(station => {
+  filteredStations.forEach(station => {
     const distanza = parseFloat(station.distanza);
     if (isNaN(distanza) || distanza > 100) return;
 
     const positionPercent = (distanza / 100) * 100;
     const marker = document.createElement("div");
-    marker.innerHTML = `<span title="${station.nome}\nStalli: ${station.numStalli}\nPotenza: ${station.potenza}">🔌</span>`;
+    marker.innerHTML = `<span title="${station.nome}\n${station.strada}\n${station.distanza} km\nStalli: ${station.numStalli}\nPotenza: ${station.potenza}">🔌</span>`;
     marker.style.position = "absolute";
     marker.style.left = `${positionPercent}%`;
     marker.style.top = "-6px";
