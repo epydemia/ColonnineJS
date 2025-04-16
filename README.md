@@ -1,64 +1,86 @@
-**ColonnineJS** is a lightweight web application that shows your current geographic coordinates, the road you're currently driving on, and will eventually display the distance to the next electric vehicle (EV) charging station along that road.
+# ⚡ ColonnineJS
+
+**ColonnineJS** is a lightweight web app that shows your real-time GPS position, direction of travel, and nearby EV charging stations along the same highway, filtered based on your heading.
+
+---
 
 ## 🚀 Objective
 
-The main goal of this project is to build a location-aware web app that:
+Build a location-aware app that:
 
-- Detects your current GPS position
-- Identifies the road you're traveling on using reverse geocoding
-- Shows a map with your current location
-- Calculates and displays the distance to the next EV charging station on the same road
+- Detects your current GPS position and heading
+- Determines which highway you're on using reverse geocoding
+- Shows your position on an interactive map
+- Filters and displays compatible EV chargers along the same highway and in the same direction
+- Offers a simulation mode for testing predefined GPS paths
+
+---
 
 ## 🛠️ Technologies Used
 
-- HTML5
-- CSS3
-- JavaScript (Vanilla)
-- [Leaflet.js](https://leafletjs.com/) for interactive map rendering
-- [OpenStreetMap Nominatim API](https://nominatim.org/release-docs/latest/api/Reverse/) for reverse geocoding
+- **HTML5 + CSS3**
+- **Vanilla JavaScript (ES Modules)**
+- [Leaflet.js](https://leafletjs.com/) — interactive map rendering
+- [OpenStreetMap Nominatim API](https://nominatim.org/) — reverse geocoding
+- Optional GPX input — for advanced simulation
+
+---
 
 ## 📂 Project Structure
 
 ```
 ColonnineJS/
-├── index.html                 # Main HTML structure
-├── styles.css                 # Page styling and animations
+├── index.html                 # Main HTML layout
+├── styles.css                 # Styles for layout, map and markers
 ├── js/
-│   ├── geolocalizzazione.js   # Geolocation logic, heading and map
-│   ├── colonnine.js           # Charger data loading, sorting, rendering
+│   ├── index.js               # App entry point and controller
+│   ├── dataloader.js          # Loads and caches EV charger data
+│   ├── geoutils.js            # Utilities: distance, direction, angle
+│   ├── geolocalizzazione.js   # Manages GPS, heading, reverse geocoding
+│   ├── colonnine.js           # Map rendering, filtering and station updates
+└── data/
+    ├── free_to_x_reverse.json # Preprocessed charger dataset
+    └── test.json              # Local test dataset
 ```
+
+---
 
 ## 🌐 Usage
 
-To use this app:
+1. Open `index.html` in a browser that supports geolocation (recommended: served via `localhost`)
+2. Allow location access when prompted
+3. Watch your position update on the map with a blue ▲ icon
+4. View the current road name and direction of travel
+5. Compatible stations will appear in red, others in gray
 
-1. Open `index.html` in a browser that supports geolocation (preferably with HTTPS or `localhost`)
-2. Allow the site to access your location
-3. See your current coordinates, road name, and position on the map
+---
 
-## ✅ Features Implemented
+## ✅ Features
 
-- Interactive map centered on your current (or simulated) position
-- Real-time geolocation with fallback to debug coordinates
-- Toggle for debug mode and dynamic switching
-- Orientation-aware user marker showing direction of movement
-- Reverse geocoding to determine current road
-- Current heading display (degrees + cardinal direction)
-- Charging station data fetched from Freeto-x
-- Table and map view of stations, sorted by distance
-- Filter to show only the 5 nearest stations
-- Visual distance bar showing station icons scaled to 100 km
-- Tooltip with station info on hover
-- Simulated route via predefined debug coordinates
+- Real or simulated GPS tracking (toggle debug mode)
+- Heading indicator (compass + rotating marker)
+- Reverse geocoding to identify current road
+- Interactive map with Leaflet.js
+- Red markers for stations in same direction
+- Gray markers for all detected stations
+- Table and visual bar sorted by proximity
+- Checkbox toggle to enable/disable all filtering
+- Auto-updates as the user moves
+- Simulated movement with predefined path
 
-> ⚠️ Currently, charging station data is only retrieved from Freeto-x.
+---
 
 ## 🧭 Roadmap
 
-- Display full route polyline on the map
-- Filter chargers based on current direction of travel and correct highway carriageway
-- Navigation instructions toward the next reachable charger
-- Add support for additional operators (e.g. Ionity)
-- Fetch and cache station data in background once a day
-- Improve UX on mobile (larger markers, better touch support)
-- Optional voice feedback when approaching a charger
+- Add support for other operators (Ionity, Enel X, etc.)
+- Track user movement history
+- Add basic navigation instructions
+- Optional voice feedback when approaching a station
+- Improve mobile UX (touch + responsiveness)
+- GPX file import for advanced simulations
+
+---
+
+## 📘 Notes
+
+⚠️ Currently, data is sourced from `Freeto-x`. Additional sources will be integrated in future versions.
