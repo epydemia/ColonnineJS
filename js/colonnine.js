@@ -33,20 +33,9 @@ export function initColonnine(map, aree, userCoordinates) {
   }
   window.stationMarkers = [];
 
-  const tbody = document.querySelector("#stations-table tbody");
-  tbody.innerHTML = "";
+  aggiornaTabellaColonnine(results);
 
   results.forEach(station => {
-    const row = document.createElement("tr");
-    row.innerHTML = `
-      <td>${station.nome}</td>
-      <td>${station.strada}</td>
-      <td>${station.distanza}</td>
-      <td>${station.lat}</td>
-      <td>${station.lon}</td>
-    `;
-    tbody.appendChild(row);
-
     const markerIcon = L.divIcon({
       className: 'custom-marker',
       html: '<div class="marker-grigio"></div>',
@@ -104,20 +93,9 @@ export function updateColonnine(map, aree, userLat, userLon, heading) {
   }
   window.stationMarkers = [];
 
-  const tbody = document.querySelector("#stations-table tbody");
-  tbody.innerHTML = "";
+  aggiornaTabellaColonnine(filtered);
 
   filtered.forEach(station => {
-    const row = document.createElement("tr");
-    row.innerHTML = `
-      <td>${station.nome}</td>
-      <td>${station.strada}</td>
-      <td>${station.distanza.toFixed(2)}</td>
-      <td>${station.lat}</td>
-      <td>${station.lon}</td>
-    `;
-    tbody.appendChild(row);
-
     const markerIcon = L.divIcon({
       className: 'custom-marker',
       html: `<div class="${station.isAvanti ? 'marker-rosso' : 'marker-grigio'}"></div>`,
@@ -152,5 +130,24 @@ function updateDistanceBar(stations) {
     marker.style.transform = "translateX(-50%)";
     marker.style.fontSize = "18px";
     bar.appendChild(marker);
+  });
+}
+
+function aggiornaTabellaColonnine(colonnine) {
+  const tbody = document.querySelector("#stations-table tbody");
+  if (!tbody) return;
+
+  tbody.innerHTML = "";
+
+  colonnine.forEach(station => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${station.nome}</td>
+      <td>${station.strada}</td>
+      <td>${station.distanza.toFixed(2)}</td>
+      <td>${station.lat}</td>
+      <td>${station.lon}</td>
+    `;
+    tbody.appendChild(row);
   });
 }
