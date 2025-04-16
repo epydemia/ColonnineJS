@@ -49,7 +49,7 @@ export function initColonnine(map, aree, userCoordinates) {
 
     const markerIcon = L.divIcon({
       className: 'custom-marker',
-      html: `<div style="width: 14px; height: 14px; border-radius: 50%; background-color: gray; border: 2px solid white;"></div>`,
+      html: '<div class="marker-grigio"></div>',
       iconSize: [14, 14],
       iconAnchor: [7, 7]
     });
@@ -120,7 +120,7 @@ export function updateColonnine(map, aree, userLat, userLon, heading) {
 
     const markerIcon = L.divIcon({
       className: 'custom-marker',
-      html: `<div style="width: 14px; height: 14px; border-radius: 50%; background-color: ${station.isAvanti ? 'red' : 'gray'}; border: 2px solid white;"></div>`,
+      html: `<div class="${station.isAvanti ? 'marker-rosso' : 'marker-grigio'}"></div>`,
       iconSize: [14, 14],
       iconAnchor: [7, 7]
     });
