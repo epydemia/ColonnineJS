@@ -27,11 +27,13 @@ window.addEventListener("load", async () => {
   initGeolocation((lat, lon) => {
     const heading = getUserHeading();
     if (lat != null && lon != null) {
+        console.log("updateColonnine", lat, lon);
       updateColonnine(map, aree, lat, lon, heading);
     }
   }, debug);
   const coords = await getUserPosition();
 if (coords) {
+    console.log("initColonnine", coords.lat, coords.lon);
   initColonnine(map, aree, coords);
 }
 });
