@@ -73,6 +73,7 @@ export function initGeolocation(callback, debug = false) {
           userMarker.setLatLng([lat, lon]);
           userMarker._icon.style.transform = `rotate(${userHeading}deg)`;
         }
+        window.leafletMap.setView([lat, lon]);
       }
 
       callback(lat, lon);
@@ -113,6 +114,7 @@ export function initGeolocation(callback, debug = false) {
             userMarker.setLatLng([lat, lon]);
             userMarker._icon.style.transform = `rotate(${userHeading}deg)`;
           }
+          window.leafletMap.setView([lat, lon]);
         }
 
         callback(lat, lon);
