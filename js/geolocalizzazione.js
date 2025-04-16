@@ -1,8 +1,9 @@
-import { getDistanceFromLatLonInKm, calcolaAngoloTraDuePunti } from './geoutils.js';
+import { getDistanceFromLatLonInKm, calcolaAngoloTraDuePunti, getDirezioneUtente } from './geoutils.js';
 
 let userCoordinates = null;
 let userHeading = 0;
 let lastUserCoordinates = null;
+let userMarker = null;
 
 export function getUserCoordinates() {
   return userCoordinates;
@@ -43,7 +44,37 @@ export function initGeolocation(callback, debug = false) {
       index = (index + 1) % debugCoords.length;
 
       userCoordinates = { lat, lon };
+      const coordsDiv = document.getElementById("coords");
+      if (coordsDiv) {
+        coordsDiv.innerText = `Latitudine: ${lat}\nLongitudine: ${lon}`;
+      }
+      reverseGeocode(lat, lon).then(strada => {
+        const stradaDiv = document.getElementById("strada");
+        if (stradaDiv) {
+          stradaDiv.innerText = `🛣️ ${strada}`;
+        }
+      });
       updateHeading(lat, lon);
+      const direzioneDiv = document.getElementById("direzione");
+      if (direzioneDiv) {
+        direzioneDiv.innerText = `🧭 ${userHeading.toFixed(0)}° (${getDirezioneUtente(userHeading)})`;
+      }
+
+      if (window.leafletMap) {
+        if (!userMarker) {
+          const icon = L.divIcon({
+            className: 'user-heading-icon',
+            html: '<div style="color: blue; font-size: 32px;">▲</div>',
+            iconSize: [24, 24],
+            iconAnchor: [12, 12]
+          });
+          userMarker = L.marker([lat, lon], { icon, rotationAngle: userHeading }).addTo(window.leafletMap);
+        } else {
+          userMarker.setLatLng([lat, lon]);
+          userMarker._icon.style.transform = `rotate(${userHeading}deg)`;
+        }
+      }
+
       callback(lat, lon);
     }, 3000);
   } else if ("geolocation" in navigator) {
@@ -53,7 +84,37 @@ export function initGeolocation(callback, debug = false) {
         const lon = parseFloat(position.coords.longitude.toFixed(6));
 
         userCoordinates = { lat, lon };
+        const coordsDiv = document.getElementById("coords");
+        if (coordsDiv) {
+          coordsDiv.innerText = `Latitudine: ${lat}\nLongitudine: ${lon}`;
+        }
+        reverseGeocode(lat, lon).then(strada => {
+          const stradaDiv = document.getElementById("strada");
+          if (stradaDiv) {
+            stradaDiv.innerText = `🛣️ ${strada}`;
+          }
+        });
         updateHeading(lat, lon);
+        const direzioneDiv = document.getElementById("direzione");
+        if (direzioneDiv) {
+          direzioneDiv.innerText = `🧭 ${userHeading.toFixed(0)}° (${getDirezioneUtente(userHeading)})`;
+        }
+
+        if (window.leafletMap) {
+          if (!userMarker) {
+            const icon = L.divIcon({
+              className: 'user-heading-icon',
+              html: '<div style="color: blue; font-size: 32px;">▲</div>',
+              iconSize: [24, 24],
+              iconAnchor: [12, 12]
+            });
+            userMarker = L.marker([lat, lon], { icon, rotationAngle: userHeading }).addTo(window.leafletMap);
+          } else {
+            userMarker.setLatLng([lat, lon]);
+            userMarker._icon.style.transform = `rotate(${userHeading}deg)`;
+          }
+        }
+
         callback(lat, lon);
       },
       (error) => {
@@ -90,6 +151,7 @@ function updateHeading(lat, lon) {
 }
 
 export async function getUserPosition() {
+    console.log("getUserPosition");
   if (userCoordinates) return userCoordinates;
 
   return new Promise(resolve => {

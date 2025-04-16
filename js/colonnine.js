@@ -9,7 +9,7 @@ export function setColonnineData(aree) {
 export function initColonnine(map, aree, userCoordinates) {
   console.log("📥 Inizio visualizzazione iniziale colonnine");
   document.body.style.cursor = "wait";
-  document.getElementById("coords").innerText = "⏳ Caricamento colonnine...";
+  //document.getElementById("coords").innerText = "⏳ Caricamento colonnine...";
 
   if (!userCoordinates) return null;
   const results = aree.map(area => {
@@ -60,7 +60,8 @@ export function initColonnine(map, aree, userCoordinates) {
   });
 
   document.body.style.cursor = "default";
-  document.getElementById("coords").innerText = "";
+  //document.getElementById("coords").innerText = "";
+  // NB: Non toccare #strada e #direzione – sono gestiti da geolocalizzazione.js
 }
 
 export function updateColonnine(map, aree, userLat, userLon, heading) {
@@ -78,8 +79,10 @@ export function updateColonnine(map, aree, userLat, userLon, heading) {
 
     const stradaAreaNorm = normalizza(area.stradaReverse);
     const stradaCompatibile = stradaUtenteNorm && stradaAreaNorm && stradaUtenteNorm === stradaAreaNorm;
-    const direzioneCompatibile = area.direzione?.toUpperCase() === direzioneUtente;
-    if (!direzioneCompatibile || distanza > 100) return null;
+    const direzioneAngolareCompatibile = area.direzione?.toUpperCase() === direzioneUtente;
+    if (distanza > 100) return null;
+
+    const isAvanti = stradaCompatibile && direzioneAngolareCompatibile;
 
     return {
       nome: area.nome,
@@ -87,7 +90,8 @@ export function updateColonnine(map, aree, userLat, userLon, heading) {
       lat,
       lon,
       distanza,
-      colonnine: area.colonnine
+      colonnine: area.colonnine,
+      isAvanti
     };
   }).filter(Boolean);
 
@@ -114,13 +118,9 @@ export function updateColonnine(map, aree, userLat, userLon, heading) {
     `;
     tbody.appendChild(row);
 
-    const angolo = calcolaAngoloTraDuePunti(userLat, userLon, station.lat, station.lon);
-    const differenza = Math.abs((angolo - heading + 360) % 360);
-    const isAvanti = differenza < 60 || differenza > 300;
-
     const markerIcon = L.divIcon({
       className: 'custom-marker',
-      html: `<div style="width: 14px; height: 14px; border-radius: 50%; background-color: ${isAvanti ? 'red' : 'gray'}; border: 2px solid white;"></div>`,
+      html: `<div style="width: 14px; height: 14px; border-radius: 50%; background-color: ${station.isAvanti ? 'red' : 'gray'}; border: 2px solid white;"></div>`,
       iconSize: [14, 14],
       iconAnchor: [7, 7]
     });
