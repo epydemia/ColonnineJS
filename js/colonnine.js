@@ -57,6 +57,7 @@ export function updateColonnine(map, aree, userLat, userLon, heading) {
   const normalizza = s => s?.split(",")[0].trim().toLowerCase();
   const results = [];
 
+  const disattivaFiltri = document.querySelector("#toggleNearest")?.checked;
   const stradaUtente = aree.length ? aree[0].stradaReverse ?? "" : "";
   const stradaUtenteNorm = normalizza(stradaUtente);
   const direzioneUtente = getDirezioneUtente(heading);
@@ -69,24 +70,25 @@ export function updateColonnine(map, aree, userLat, userLon, heading) {
     const stradaAreaNorm = normalizza(area.stradaReverse);
     const stradaCompatibile = stradaUtenteNorm && stradaAreaNorm && stradaUtenteNorm === stradaAreaNorm;
     const direzioneAngolareCompatibile = area.direzione?.toUpperCase() === direzioneUtente;
-    if (distanza > 100) return null;
 
-    const isAvanti = stradaCompatibile && direzioneAngolareCompatibile;
+    if (disattivaFiltri || distanza <= 100) {
+      const isAvanti = disattivaFiltri || (stradaCompatibile && direzioneAngolareCompatibile);
 
-    return {
-      nome: area.nome,
-      strada: area.strada || area.stradaReverse || "Strada sconosciuta",
-      lat,
-      lon,
-      distanza,
-      colonnine: area.colonnine,
-      isAvanti
-    };
+      return {
+        nome: area.nome,
+        strada: area.strada || area.stradaReverse || "Strada sconosciuta",
+        lat,
+        lon,
+        distanza,
+        colonnine: area.colonnine,
+        isAvanti
+      };
+    }
+    return null;
   }).filter(Boolean);
 
   preResults.sort((a, b) => a.distanza - b.distanza);
-  const showOnlyNearest = document.querySelector("#toggleNearest")?.checked;
-  const filtered = showOnlyNearest ? preResults.slice(0, 5) : preResults;
+  const filtered = preResults;
 
   if (window.stationMarkers) {
     window.stationMarkers.forEach(m => map.removeLayer(m));

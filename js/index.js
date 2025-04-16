@@ -36,4 +36,16 @@ if (coords) {
     console.log("initColonnine", coords.lat, coords.lon);
   initColonnine(map, aree, coords);
 }
+
+  document.querySelector('#toggleNearest')?.addEventListener('change', async () => {
+    const coords = getUserCoordinates();
+    const heading = getUserHeading();
+    if (coords) {
+      updateColonnine(map, aree, coords.lat, coords.lon, heading);
+    }
+  });
+
+  document.querySelector('#toggleDebug')?.addEventListener('change', () => {
+    window.location.reload();
+  });
 });
