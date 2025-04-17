@@ -47,6 +47,8 @@ body {
   .marker-blu {
     font-size: 32px;
     color: blue;
+    display: inline-block;
+    transition: transform 0.2s ease;
   }
 
 @keyframes bounce {

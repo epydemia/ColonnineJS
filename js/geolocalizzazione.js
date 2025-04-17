@@ -64,7 +64,7 @@ export function initGeolocation(callback, debug = false) {
         if (!userMarker) {
           const icon = L.divIcon({
             className: 'user-heading-icon',
-            html: '<div style="color: blue; font-size: 32px;">▲</div>',
+            html: '<div class="marker-blu">▲</div>',
             iconSize: [24, 24],
             iconAnchor: [12, 12]
           });
@@ -105,7 +105,7 @@ export function initGeolocation(callback, debug = false) {
           if (!userMarker) {
             const icon = L.divIcon({
               className: 'user-heading-icon',
-              html: '<div style="color: blue; font-size: 32px;">▲</div>',
+              html: '<div class="marker-blu">▲</div>',
               iconSize: [24, 24],
               iconAnchor: [12, 12]
             });
