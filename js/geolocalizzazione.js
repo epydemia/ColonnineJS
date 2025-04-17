@@ -2,6 +2,7 @@ import { getDistanceFromLatLonInKm, calcolaAngoloTraDuePunti, getDirezioneUtente
 
 let userCoordinates = null;
 let userHeading = 0;
+let isHeadingStimato = true;
 let lastUserCoordinates = null;
 let userMarker = null;
 
@@ -54,11 +55,8 @@ export function initGeolocation(callback, debug = false) {
           stradaDiv.innerText = `🛣️ ${strada}`;
         }
       });
-      updateHeading(lat, lon);
-      const direzioneDiv = document.getElementById("direzione");
-      if (direzioneDiv) {
-        direzioneDiv.innerText = `🧭 ${userHeading.toFixed(0)}° (${getDirezioneUtente(userHeading)})`;
-      }
+      updateHeading(lat, lon, null);
+      aggiornaIndicatoreDirezione();
 
       aggiornaUserMarker(lat, lon);
 
@@ -69,6 +67,7 @@ export function initGeolocation(callback, debug = false) {
       (position) => {
         const lat = parseFloat(position.coords.latitude.toFixed(6));
         const lon = parseFloat(position.coords.longitude.toFixed(6));
+        const deviceHeading = position.coords.heading;
 
         userCoordinates = { lat, lon };
         const coordsDiv = document.getElementById("coords");
@@ -81,11 +80,8 @@ export function initGeolocation(callback, debug = false) {
             stradaDiv.innerText = `🛣️ ${strada}`;
           }
         });
-        updateHeading(lat, lon);
-        const direzioneDiv = document.getElementById("direzione");
-        if (direzioneDiv) {
-          direzioneDiv.innerText = `🧭 ${userHeading.toFixed(0)}° (${getDirezioneUtente(userHeading)})`;
-        }
+        updateHeading(lat, lon, deviceHeading);
+        aggiornaIndicatoreDirezione();
 
         aggiornaUserMarker(lat, lon);
 
@@ -105,7 +101,21 @@ export function initGeolocation(callback, debug = false) {
   }
 }
 
-function updateHeading(lat, lon) {
+function aggiornaIndicatoreDirezione() {
+  const direzioneDiv = document.getElementById("direzione");
+  if (direzioneDiv) {
+    direzioneDiv.innerText = `🧭 ${userHeading.toFixed(0)}°${(typeof isHeadingStimato !== 'undefined' && isHeadingStimato) ? '*' : ''} (${getDirezioneUtente(userHeading)})`;
+  }
+}
+
+function updateHeading(lat, lon, heading = null) {
+  if (heading !== null && !isNaN(heading)) {
+    userHeading = heading;
+    lastUserCoordinates = { lat, lon };
+    isHeadingStimato = false;
+    return;
+  }
+
   let angle = -90;
   let aggiorna = true;
 
@@ -121,6 +131,7 @@ function updateHeading(lat, lon) {
   if (aggiorna) {
     userHeading = (angle + 90 + 360) % 360;
     lastUserCoordinates = { lat, lon };
+    isHeadingStimato = true;
   }
 }
 
