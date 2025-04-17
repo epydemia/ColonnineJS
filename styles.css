@@ -132,13 +132,3 @@ body {
 #options-panel.open {
   right: 0;
 }
-
-<label>
-    <input type="checkbox" id="toggleDebug" />
-    Debug posizione
-  </label>
-  <label>
-    <input type="checkbox" id="toggleNearest" />
-    Show all charging stations
-  </label>
-</div>

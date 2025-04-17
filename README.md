@@ -73,7 +73,6 @@ ColonnineJS/
 ## 🧭 Roadmap
 
 - Add support for other operators (Ionity, Enel X, etc.)
-- Track user movement history
 - Add basic navigation instructions
 - Optional voice feedback when approaching a station
 - Improve mobile UX (touch + responsiveness)
