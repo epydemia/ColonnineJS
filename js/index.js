@@ -52,4 +52,9 @@ if (coords) {
     localStorage.setItem('debugPosizione', e.target.checked ? '1' : '0');
     window.location.reload();
   });
+
+  // Event listener per il pannello delle opzioni
+  document.querySelector('#options-toggle')?.addEventListener('click', () => {
+    document.getElementById('options-panel')?.classList.toggle('open');
+  });
 });
