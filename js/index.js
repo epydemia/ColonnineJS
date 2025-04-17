@@ -8,6 +8,9 @@ window.addEventListener("load", async () => {
   const aree = await getAree();
   setColonnineData(aree);
 
+  const debugEnabled = localStorage.getItem('debugPosizione') === '1';
+  document.querySelector('#toggleDebug').checked = debugEnabled;
+
   // Inizializza mappa se necessario
   if (window.leafletMap) {
     console.warn("⚠️ La mappa è già stata inizializzata. Salto la creazione.");
@@ -23,7 +26,7 @@ window.addEventListener("load", async () => {
   }
 
   // Avvia geolocalizzazione e callback
-  const debug = document.querySelector('#toggleDebug')?.checked;
+  const debug = debugEnabled;
   initGeolocation((lat, lon) => {
     const heading = getUserHeading();
     if (lat != null && lon != null) {
@@ -45,7 +48,8 @@ if (coords) {
     }
   });
 
-  document.querySelector('#toggleDebug')?.addEventListener('change', () => {
+  document.querySelector('#toggleDebug')?.addEventListener('change', (e) => {
+    localStorage.setItem('debugPosizione', e.target.checked ? '1' : '0');
     window.location.reload();
   });
 });

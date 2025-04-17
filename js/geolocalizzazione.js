@@ -60,21 +60,7 @@ export function initGeolocation(callback, debug = false) {
         direzioneDiv.innerText = `🧭 ${userHeading.toFixed(0)}° (${getDirezioneUtente(userHeading)})`;
       }
 
-      if (window.leafletMap) {
-        if (!userMarker) {
-          const icon = L.divIcon({
-            className: 'user-heading-icon',
-            html: '<div class="marker-blu">▲</div>',
-            iconSize: [24, 24],
-            iconAnchor: [12, 12]
-          });
-          userMarker = L.marker([lat, lon], { icon, rotationAngle: userHeading }).addTo(window.leafletMap);
-        } else {
-          userMarker.setLatLng([lat, lon]);
-          userMarker._icon.style.transform = `rotate(${userHeading}deg)`;
-        }
-        window.leafletMap.setView([lat, lon]);
-      }
+      aggiornaUserMarker(lat, lon);
 
       callback(lat, lon);
     }, 3000);
@@ -101,21 +87,7 @@ export function initGeolocation(callback, debug = false) {
           direzioneDiv.innerText = `🧭 ${userHeading.toFixed(0)}° (${getDirezioneUtente(userHeading)})`;
         }
 
-        if (window.leafletMap) {
-          if (!userMarker) {
-            const icon = L.divIcon({
-              className: 'user-heading-icon',
-              html: '<div class="marker-blu">▲</div>',
-              iconSize: [24, 24],
-              iconAnchor: [12, 12]
-            });
-            userMarker = L.marker([lat, lon], { icon, rotationAngle: userHeading }).addTo(window.leafletMap);
-          } else {
-            userMarker.setLatLng([lat, lon]);
-            userMarker._icon.style.transform = `rotate(${userHeading}deg)`;
-          }
-          window.leafletMap.setView([lat, lon]);
-        }
+        aggiornaUserMarker(lat, lon);
 
         callback(lat, lon);
       },
@@ -166,4 +138,28 @@ export async function getUserPosition() {
     };
     check();
   });
+}
+
+function aggiornaUserMarker(lat, lon) {
+  if (window.leafletMap) {
+    if (!userMarker) {
+      const icon = L.divIcon({
+        className: 'user-heading-icon',
+        html: '<div class="marker-blu"><span class="freccia">▲</span></div>',
+        iconSize: [24, 24],
+        iconAnchor: [12, 12]
+      });
+      userMarker = L.marker([lat, lon], { icon }).addTo(window.leafletMap);
+    } else {
+      userMarker.setLatLng([lat, lon]);
+    }
+
+    const arrow = userMarker._icon?.querySelector('.freccia');
+    if (arrow) {
+      arrow.style.transform = `rotate(${userHeading}deg)`;
+    }
+
+    const currentZoom = window.leafletMap.getZoom();
+    window.leafletMap.setView([lat, lon], currentZoom);
+  }
 }
