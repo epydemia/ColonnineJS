@@ -4,6 +4,7 @@ body {
     padding: 2em;
     background-color: #f5f5f5;
     color: #333;
+    margin: 0;
   }
   
   h1 {
@@ -63,6 +64,14 @@ body {
   50% {
     transform: scaleX(-1) translateY(-4px);
   }
+
 }
 
-
+#distance-bar-container {
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 1000;
+  padding: 10px 0;
+  border-bottom: 1px solid #ccc;
+}
