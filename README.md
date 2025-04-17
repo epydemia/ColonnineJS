@@ -1,6 +1,6 @@
-# ⚡ ColonnineJS
+# ⚡ Next-To-X
 
-**ColonnineJS** is a lightweight web app that shows your real-time GPS position, direction of travel, and nearby EV charging stations along the same highway, filtered based on your heading.
+**Next-To-X** is a lightweight web app that shows your real-time GPS position, direction of travel, and nearby EV charging stations along the same highway, filtered based on your heading.
 
 ---
 
