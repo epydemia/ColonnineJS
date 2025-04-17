@@ -2,10 +2,13 @@ import { getDistanceFromLatLonInKm, calcolaAngoloTraDuePunti, getDirezioneUtente
 
 let colonnineAree = [];
 
+// Salva in memoria l'elenco completo delle colonnine
 export function setColonnineData(aree) {
   colonnineAree = aree;
 }
 
+// Inizializza la mappa, la tabella e i marker grigi.
+// Calcola le distanze tra l'utente e le colonnine e aggiorna l'interfaccia.
 export function initColonnine(map, aree, userCoordinates) {
   console.log("📥 Inizio visualizzazione iniziale colonnine");
   document.body.style.cursor = "wait";
@@ -53,13 +56,16 @@ export function initColonnine(map, aree, userCoordinates) {
   // NB: Non toccare #strada e #direzione – sono gestiti da geolocalizzazione.js
 }
 
+// Aggiorna le colonnine: normalizza gli indirizzi, applica filtri opzionali,
+// calcola le distanze, verifica la compatibilità degli indirizzi e delle direzioni,
+// crea marker sulla mappa e aggiorna l'interfaccia utente.
 export function updateColonnine(map, aree, userLat, userLon, heading) {
-  const normalizza = s => s?.split(",")[0].trim().toLowerCase();
+  const normalizeFull = s => s?.toLowerCase().trim();
   const results = [];
 
   const disattivaFiltri = document.querySelector("#toggleNearest")?.checked;
-  const stradaUtente = aree.length ? aree[0].stradaReverse ?? "" : "";
-  const stradaUtenteNorm = normalizza(stradaUtente);
+  const stradaUtente = window.stradaUtenteReverse ?? "";
+  const stradaUtenteNorm = normalizeFull(stradaUtente);
   const direzioneUtente = getDirezioneUtente(heading);
 
   const preResults = aree.map(area => {
@@ -67,8 +73,16 @@ export function updateColonnine(map, aree, userLat, userLon, heading) {
     const lon = parseFloat(area.lon);
     const distanza = getDistanceFromLatLonInKm(userLat, userLon, lat, lon);
 
-    const stradaAreaNorm = normalizza(area.stradaReverse);
-    const stradaCompatibile = stradaUtenteNorm && stradaAreaNorm && stradaUtenteNorm === stradaAreaNorm;
+    const stradaAreaNorm = normalizeFull(area.stradaReverse);
+    const stradaCompatibile =
+      stradaUtenteNorm &&
+      stradaAreaNorm &&
+      (stradaAreaNorm.includes(stradaUtenteNorm) || stradaUtenteNorm.includes(stradaAreaNorm));
+
+    if(stradaCompatibile) {
+      console.log("Strada compatibile:", stradaUtenteNorm, stradaAreaNorm,area.nome);
+    }
+
     const direzioneAngolareCompatibile = area.direzione?.toUpperCase() === direzioneUtente;
 
     if (disattivaFiltri || distanza <= 100) {
@@ -113,6 +127,8 @@ export function updateColonnine(map, aree, userLat, userLon, heading) {
   updateDistanceBar(filtered);
 }
 
+// Calcola la posizione delle icone sulla barra delle distanze in base alla distanza
+// e aggiorna dinamicamente l'interfaccia con le informazioni delle colonnine.
 function updateDistanceBar(stations) {
   const bar = document.getElementById("distance-bar");
   if (!bar) return;
@@ -135,6 +151,8 @@ function updateDistanceBar(stations) {
   });
 }
 
+// Costruisce la tabella HTML con le informazioni delle colonnine filtrate,
+// aggiornando i dati visualizzati nell'interfaccia utente.
 function aggiornaTabellaColonnine(colonnine) {
   const tbody = document.querySelector("#stations-table tbody");
   if (!tbody) return;

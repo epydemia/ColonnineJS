@@ -50,6 +50,7 @@ export function initGeolocation(callback, debug = false) {
         coordsDiv.innerText = `Latitudine: ${lat}\nLongitudine: ${lon}`;
       }
       reverseGeocode(lat, lon).then(strada => {
+        window.stradaUtenteReverse = strada;
         const stradaDiv = document.getElementById("strada");
         if (stradaDiv) {
           stradaDiv.innerText = `🛣️ ${strada}`;
@@ -75,6 +76,7 @@ export function initGeolocation(callback, debug = false) {
           coordsDiv.innerText = `Latitudine: ${lat}\nLongitudine: ${lon}`;
         }
         reverseGeocode(lat, lon).then(strada => {
+          window.stradaUtenteReverse = strada;
           const stradaDiv = document.getElementById("strada");
           if (stradaDiv) {
             stradaDiv.innerText = `🛣️ ${strada}`;
