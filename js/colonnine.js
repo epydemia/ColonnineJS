@@ -139,11 +139,13 @@ function updateDistanceBar(stations) {
     const distanza = parseFloat(station.distanza);
     if (isNaN(distanza) || distanza > 100) return;
 
-    const positionPercent = (distanza / 100) * 100;
+    const barWidth = bar.clientWidth;
+    const maxDistance = 100;
+    const positionPx = (distanza / maxDistance) * barWidth;
     const marker = document.createElement("div");
     marker.innerHTML = `<span title="${station.nome}\n${station.strada}\n${station.distanza.toFixed(2)} km\nStalli: ${station.colonnine?.length ?? "?"}">🔌</span>`;
     marker.style.position = "absolute";
-    marker.style.left = `${positionPercent}%`;
+    marker.style.left = `${positionPx}px`;
     marker.style.top = "-6px";
     marker.style.transform = "translateX(-50%)";
     marker.style.fontSize = "18px";
