@@ -6,10 +6,13 @@ let isHeadingStimato = true;
 let lastUserCoordinates = null;
 let userMarker = null;
 
-
 const autostradeMap = {
   "A1": ["Milano Napoli", "Autostrada del Sole"],
+  "A2": ["Salerno Reggio Calabria", "Autostrada del Mediterraneo"],
+  "A3": ["Napoli Salerno"],
   "A4": ["Torino Trieste", "Serenissima"],
+  "A5": ["Torino Aosta Monte Bianco"],
+  "A6": ["Torino Savona"],
   "A7": ["Milano Genova", "Autostrada dei Giovi"],
   "A8": ["Milano Varese", "Autostrada dei Laghi"],
   "A9": ["Lainate Chiasso", "Autostrada dei Laghi"],
@@ -20,6 +23,7 @@ const autostradeMap = {
   "A14": ["Bologna Taranto", "Autostrada Adriatica"],
   "A15": ["Parma La Spezia", "Autostrada della Cisa"],
   "A16": ["Napoli Canosa", "Autostrada dei Due Mari"],
+  "A17": ["Bari Napoli (storica)"],
   "A18": ["Messina Catania", "Siracusa Rosolini"],
   "A19": ["Palermo Catania"],
   "A20": ["Messina Palermo"],
