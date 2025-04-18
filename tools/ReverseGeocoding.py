@@ -19,7 +19,7 @@ def reverse_geocode(lat, lon):
     time.sleep(1)
     return street_name
 
-def enrich_file_with_reverse_geocoding(input_path="tools/free_to_x.json.original.json", output_path="free_to_x_reverse.json"):
+def enrich_file_with_reverse_geocoding(input_path="free_to_x.json.original.json", output_path="free_to_x_reverse.json"):
     with open(input_path, 'r', encoding='utf-8') as file:
         raw_data = json.load(file)
         lista_aree = raw_data.get("listaAree", [])
@@ -34,7 +34,10 @@ def enrich_file_with_reverse_geocoding(input_path="tools/free_to_x.json.original
         print(f"Reverse geocoding: {percent}% completato ({idx + 1}/{total})", end="\r")
 
     with open(output_path, 'w', encoding='utf-8') as file:
-        json.dump({"listaAree": lista_aree}, file, ensure_ascii=False, indent=2)
+        output_data = {"listaAree": lista_aree}
+        if "data_download" in raw_data:
+            output_data["data_download"] = raw_data["data_download"]
+        json.dump(output_data, file, ensure_ascii=False, indent=2)
     print(f"\nFile aggiornato salvato in: {output_path}")
 
 if __name__ == "__main__":

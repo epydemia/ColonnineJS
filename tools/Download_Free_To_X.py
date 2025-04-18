@@ -1,5 +1,6 @@
 import requests
 import json
+from datetime import datetime
 
 def download_colonnine_json(url, output_path):
     try:
@@ -7,6 +8,7 @@ def download_colonnine_json(url, output_path):
         response = requests.get(url, timeout=10)  # timeout in secondi
         response.raise_for_status()  # Solleva un'eccezione per errori HTTP
         colonnine_data = response.json()
+        colonnine_data["data_download"] = datetime.now(datetime.UTC).isoformat()
 
         original_output_path = output_path + ".original.json"
         with open(original_output_path, 'w', encoding='utf-8') as original_file:

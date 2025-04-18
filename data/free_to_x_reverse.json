@@ -277,7 +277,7 @@
           ]
         }
       ],
-      "stradaReverse": "Via Forlanini, Cascina Pessina, Novegro, Peschiera Borromeo, Milano, Lombardia, 20054, Italia"
+      "stradaReverse": "Via Forlanini, Cascina Pessina, Novegro, Segrate, Milano, Lombardia, 20054, Italia"
     },
     {
       "nome": "AEROPORTO MILANO LINATE PRIME",
@@ -632,7 +632,7 @@
           ]
         }
       ],
-      "stradaReverse": "Area Servizio Arda Est, Autostrada del Sole, Fiorenzuola d'Arda, Piacenza, Emilia-Romagna, 29017, Italia"
+      "stradaReverse": "Area d'Arda Est, Autostrada del Sole, Portone, Fiorenzuola d'Arda, Piacenza, Emilia-Romagna, 29017, Italia"
     },
     {
       "codice": "A21",
@@ -745,7 +745,7 @@
           ]
         }
       ],
-      "stradaReverse": "Autostrada del Sole, Fiorenzuola d'Arda, Piacenza, Emilia-Romagna, 29017, Italia"
+      "stradaReverse": "Autostrada del Sole, Portone, Fiorenzuola d'Arda, Piacenza, Emilia-Romagna, 29017, Italia"
     },
     {
       "codice": "Z99",
@@ -859,7 +859,7 @@
           ]
         }
       ],
-      "stradaReverse": "Arno Est, Autostrada del Sole, San Giovanni Valdarno, Figline e Incisa Valdarno, Arezzo, Toscana, 52027, Italia"
+      "stradaReverse": "Arno Est, Strada degli Urbini, San Giovanni Valdarno, Arezzo, Toscana, 52027, Italia"
     },
     {
       "codice": "A66",
@@ -1279,7 +1279,7 @@
           ]
         }
       ],
-      "stradaReverse": "Badia al Pino ovest, Dorna, Badia al Pino, Civitella in Val di Chiana, Arezzo, Toscana, 52041, Italia"
+      "stradaReverse": "Badia al Pino ovest, Autostrada del Sole, Tuori, Viciomaggio, Civitella in Val di Chiana, Arezzo, Toscana, 52041, Italia"
     },
     {
       "codice": "A37",
@@ -1534,7 +1534,7 @@
           ]
         }
       ],
-      "stradaReverse": "Brembo nord, Autostrada Serenissima, Osio Sopra, Bergamo, Lombardia, 24040, Italia"
+      "stradaReverse": "Brembo nord, Via Vaccarezza, Osio Sopra, Bergamo, Lombardia, 24040, Italia"
     },
     {
       "codice": "D20",
@@ -1646,7 +1646,7 @@
           ]
         }
       ],
-      "stradaReverse": "Brianza Nord, Via Cascina Trivulzina, Omate, Agrate Brianza, Monza e della Brianza, Lombardia, 20864, Italia"
+      "stradaReverse": "Brianza Nord, Tangenziale Est Esterna, Caponago, Monza e della Brianza, Lombardia, 20867, Italia"
     },
     {
       "codice": "D21",
@@ -4252,7 +4252,7 @@
           ]
         }
       ],
-      "stradaReverse": "Area di Servizio Irpinia sud, Area di Servizio Irpinia Sud, Partenio, Avellino, Campania, 83100, Italia"
+      "stradaReverse": "Area di Servizio Irpinia Sud, Partenio, Avellino, Campania, 83100, Italia"
     },
     {
       "codice": "B40",
@@ -4958,7 +4958,7 @@
           ]
         }
       ],
-      "stradaReverse": "Autostrada dei Laghi, Cadorago, Como, Lombardia, 22071, Italia"
+      "stradaReverse": "Area di Lario Ovest, Autostrada dei Laghi, Cadorago, Como, Lombardia, 22071, Italia"
     },
     {
       "codice": "W11",
@@ -5246,7 +5246,7 @@
           ]
         }
       ],
-      "stradaReverse": "Area di Monferrato Est, Autostrada dei Trafori, Occimiano, Alessandria, Piemonte, Italia"
+      "stradaReverse": "Autostrada dei Trafori, Occimiano, Alessandria, Piemonte, Italia"
     },
     {
       "codice": "X51",
@@ -5438,7 +5438,7 @@
           ]
         }
       ],
-      "stradaReverse": "Area di servizio Montefeltro Ovest, Autostrada Adriatica, Riccione, Rimini, Emilia-Romagna, 47838, Italia"
+      "stradaReverse": "Autostrada Adriatica, Riccione, Rimini, Emilia-Romagna, 47838, Italia"
     },
     {
       "codice": "O45",
@@ -8026,7 +8026,7 @@
           ]
         }
       ],
-      "stradaReverse": "Area di Stura Ovest, Strada Provinciale del Turchino, Gnocchetto, Ovada, Alessandria, Piemonte, 16060, Italia"
+      "stradaReverse": "Area di Stura Ovest, Autostrada dei Trafori, Belforte Monferrato, Alessandria, Piemonte, 16060, Italia"
     },
     {
       "codice": "B51",
@@ -8139,7 +8139,7 @@
           ]
         }
       ],
-      "stradaReverse": "Teano Ovest, Area di servizio Teano Est, Teano, Caserta, Campania, 81057, Italia"
+      "stradaReverse": "Teano Ovest, Autostrada del Sole, Teano, Caserta, Campania, 81057, Italia"
     },
     {
       "codice": "A90",
@@ -8464,7 +8464,7 @@
           ]
         }
       ],
-      "stradaReverse": "Torre Cerrano est, Autostrada Adriatica, Silvi, Teramo, Abruzzo, 64029, Italia"
+      "stradaReverse": "Torre Cerrano est, Via dei Garofani, Silvi, Teramo, Abruzzo, 64029, Italia"
     },
     {
       "codice": "N81",
@@ -8812,7 +8812,7 @@
           ]
         }
       ],
-      "stradaReverse": "Val Trompia Nord, Via Enrico Fermi, Roncadelle, Brescia, Lombardia, 25030, Italia"
+      "stradaReverse": "Val Trompia Nord, Via Cascina Fiorita, Roncadelle, Brescia, Lombardia, 25030, Italia"
     },
     {
       "codice": "D51",
@@ -9138,5 +9138,6 @@
       ],
       "stradaReverse": "Area di Villoresi Ovest, Autostrada dei Laghi, Pagliera, Lainate, Milano, Lombardia, 20045, Italia"
     }
-  ]
+  ],
+  "data_download": "2025-04-18T12:42:51.282045Z"
 }
