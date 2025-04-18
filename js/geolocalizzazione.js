@@ -6,6 +6,44 @@ let isHeadingStimato = true;
 let lastUserCoordinates = null;
 let userMarker = null;
 
+
+const autostradeMap = {
+  "A1": ["Milano Napoli", "Autostrada del Sole"],
+  "A4": ["Torino Trieste", "Serenissima"],
+  "A7": ["Milano Genova", "Autostrada dei Giovi"],
+  "A8": ["Milano Varese", "Autostrada dei Laghi"],
+  "A9": ["Lainate Chiasso", "Autostrada dei Laghi"],
+  "A10": ["Genova Ventimiglia", "Autostrada dei Fiori"],
+  "A11": ["Firenze Pisa", "Firenze Mare"],
+  "A12": ["Genova Roma", "Autostrada Tirrenica"],
+  "A13": ["Bologna Padova"],
+  "A14": ["Bologna Taranto", "Autostrada Adriatica"],
+  "A15": ["Parma La Spezia", "Autostrada della Cisa"],
+  "A16": ["Napoli Canosa", "Autostrada dei Due Mari"],
+  "A18": ["Messina Catania", "Siracusa Rosolini"],
+  "A19": ["Palermo Catania"],
+  "A20": ["Messina Palermo"],
+  "A21": ["Torino Brescia", "Autostrada dei Vini"],
+  "A22": ["Modena Brennero", "Autostrada del Brennero"],
+  "A23": ["Palmanova Tarvisio"],
+  "A24": ["Roma Teramo", "Autostrada dei Parchi"],
+  "A25": ["Torano Pescara", "Autostrada dei Parchi"],
+  "A26": ["Voltri Gravellona Toce", "Autostrada dei Trafori"],
+  "A27": ["Mestre Belluno"],
+  "A28": ["Portogruaro Conegliano"],
+  "A29": ["Palermo Mazara del Vallo", "Autostrada del Sale"]
+};
+
+function trovaCodiceAutostrada(nomeStrada) {
+  const normalized = nomeStrada.toLowerCase();
+  for (const [codice, nomi] of Object.entries(autostradeMap)) {
+    if (nomi.some(n => normalized.includes(n.toLowerCase()))) {
+      return codice;
+    }
+  }
+  return null;
+}
+
 export function getUserCoordinates() {
   return userCoordinates;
 }
@@ -51,10 +89,18 @@ export function initGeolocation(callback, debug = false) {
       }
       reverseGeocode(lat, lon).then(strada => {
         window.stradaUtenteReverse = strada;
+        window.codiceAutostradaUtente = trovaCodiceAutostrada(strada);
         const stradaDiv = document.getElementById("strada");
         if (stradaDiv) {
-          stradaDiv.innerText = `🛣️ ${strada}`;
+          if (window.codiceAutostradaUtente)  {
+            const nomi = autostradeMap[window.codiceAutostradaUtente].join(" / ");
+            stradaDiv.innerText = `🛣️ ${window.codiceAutostradaUtente} – ${nomi}`;
+          } else {
+            stradaDiv.innerText = `🛣️ ${strada}`;
+          }
+          
         }
+
       });
       updateHeading(lat, lon, null);
       aggiornaIndicatoreDirezione();
@@ -77,9 +123,15 @@ export function initGeolocation(callback, debug = false) {
         }
         reverseGeocode(lat, lon).then(strada => {
           window.stradaUtenteReverse = strada;
+          window.codiceAutostradaUtente = trovaCodiceAutostrada(strada);
           const stradaDiv = document.getElementById("strada");
           if (stradaDiv) {
             stradaDiv.innerText = `🛣️ ${strada}`;
+          }
+          const autostradaDiv = document.getElementById("autostrada");
+          if (autostradaDiv && window.codiceAutostradaUtente) {
+            const nomi = autostradeMap[window.codiceAutostradaUtente].join(" / ");
+            autostradaDiv.innerText = `🛣️ ${window.codiceAutostradaUtente} – ${nomi}`;
           }
         });
         updateHeading(lat, lon, deviceHeading);
