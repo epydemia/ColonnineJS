@@ -1,4 +1,5 @@
 import { getDistanceFromLatLonInKm, calcolaAngoloTraDuePunti, getDirezioneUtente } from './geoutils.js';
+import { aggiornaUserMarker, aggiornaIndicatoreDirezione } from './mappaUI.js';
 
 let userCoordinates = null;
 let userHeading = 0;
@@ -107,9 +108,9 @@ export function initGeolocation(callback, debug = false) {
 
       });
       updateHeading(lat, lon, null);
-      aggiornaIndicatoreDirezione();
+      aggiornaIndicatoreDirezione(userHeading, isHeadingStimato);
 
-      aggiornaUserMarker(lat, lon);
+      aggiornaUserMarker(lat, lon, userHeading);
 
       callback(lat, lon);
     }, 3000);
@@ -139,9 +140,9 @@ export function initGeolocation(callback, debug = false) {
           }
         });
         updateHeading(lat, lon, deviceHeading);
-        aggiornaIndicatoreDirezione();
+        aggiornaIndicatoreDirezione(userHeading, isHeadingStimato);
 
-        aggiornaUserMarker(lat, lon);
+        aggiornaUserMarker(lat, lon,userHeading);
 
         callback(lat, lon);
       },
@@ -156,13 +157,6 @@ export function initGeolocation(callback, debug = false) {
     );
   } else {
     console.warn("⚠️ Geolocalizzazione non supportata dal browser.");
-  }
-}
-
-function aggiornaIndicatoreDirezione() {
-  const direzioneDiv = document.getElementById("direzione");
-  if (direzioneDiv) {
-    direzioneDiv.innerText = `🧭 ${userHeading.toFixed(0)}°${(typeof isHeadingStimato !== 'undefined' && isHeadingStimato) ? '*' : ''} (${getDirezioneUtente(userHeading)})`;
   }
 }
 
@@ -207,28 +201,4 @@ export async function getUserPosition() {
     };
     check();
   });
-}
-
-function aggiornaUserMarker(lat, lon) {
-  if (window.leafletMap) {
-    if (!userMarker) {
-      const icon = L.divIcon({
-        className: 'user-heading-icon',
-        html: '<div class="marker-blu"><span class="freccia">▲</span></div>',
-        iconSize: [24, 24],
-        iconAnchor: [12, 12]
-      });
-      userMarker = L.marker([lat, lon], { icon }).addTo(window.leafletMap);
-    } else {
-      userMarker.setLatLng([lat, lon]);
-    }
-
-    const arrow = userMarker._icon?.querySelector('.freccia');
-    if (arrow) {
-      arrow.style.transform = `rotate(${userHeading}deg)`;
-    }
-
-    const currentZoom = window.leafletMap.getZoom();
-    window.leafletMap.setView([lat, lon], currentZoom);
-  }
 }
