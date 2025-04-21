@@ -95,6 +95,8 @@ export function initGeolocation(callback, debug = false) {
       reverseGeocode(lat, lon).then(strada => {
         window.stradaUtenteReverse = strada;
         window.codiceAutostradaUtente = trovaCodiceAutostrada(strada);
+        window.modalitaAutostrada = !!window.codiceAutostradaUtente;
+        console.log("🛣️ Modalità autostrada:", window.modalitaAutostrada);
         const stradaDiv = document.getElementById("strada");
         if (stradaDiv) {
           if (window.codiceAutostradaUtente)  {
@@ -129,6 +131,8 @@ export function initGeolocation(callback, debug = false) {
         reverseGeocode(lat, lon).then(strada => {
           window.stradaUtenteReverse = strada;
           window.codiceAutostradaUtente = trovaCodiceAutostrada(strada);
+          window.modalitaAutostrada = !!window.codiceAutostradaUtente;
+          console.log("🛣️ Modalità autostrada:", window.modalitaAutostrada);
           const stradaDiv = document.getElementById("strada");
           if (stradaDiv) {
             stradaDiv.innerText = `🛣️ ${strada}`;
