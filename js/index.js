@@ -1,3 +1,4 @@
+import { aggiornaUserMarker } from './mappaUI.js';
 import { getAree } from './dataloader.js';
 import { getUserCoordinates, getUserHeading, getUserPosition, initGeolocation } from './geolocalizzazione.js';
 import { initColonnine, updateColonnine, setColonnineData } from './colonnine.js';
@@ -23,6 +24,15 @@ window.addEventListener("load", async () => {
     }).addTo(map);
     window.leafletMap = map;
     console.log("✅ Mappa inizializzata");
+    // Listener per moveend e zoomend per aggiornare il marker utente
+    map.on("zoomend", () => {
+      const coords = getUserCoordinates();
+      const heading = getUserHeading();
+      if (coords && heading !== null) {
+        map.setView([coords.lat, coords.lon], map.getZoom());
+        aggiornaUserMarker(coords.lat, coords.lon, heading);
+      }
+    });
   }
 
   // Avvia geolocalizzazione e callback
@@ -30,6 +40,8 @@ window.addEventListener("load", async () => {
   initGeolocation((lat, lon) => {
     const heading = getUserHeading();
     if (lat != null && lon != null) {
+      map.setView([lat, lon], map.getZoom());  // 💡 centramento iniziale
+      aggiornaUserMarker(lat, lon, heading);
         console.log("updateColonnine", lat, lon);
       updateColonnine(map, aree, lat, lon, heading);
     }

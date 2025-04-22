@@ -1,6 +1,7 @@
 import { getDirezioneUtente } from './geoutils.js';
 
-let userMarker = null;
+export let userMarker = null;
+let primaPosizione = true;
 
 export function aggiornaUserMarker(lat, lon, heading) {
   if (window.leafletMap) {
@@ -28,9 +29,6 @@ export function aggiornaUserMarker(lat, lon, heading) {
     if (arrow) {
       arrow.style.transform = `rotate(${heading}deg)`;
     }
-
-    const currentZoom = window.leafletMap.getZoom();
-    window.leafletMap.setView([lat, lon], currentZoom);
   }
 }
 
