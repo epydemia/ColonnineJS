@@ -46,15 +46,29 @@ body {
   }
 
   .marker-blu {
-    font-size: 32px;
-    color: blue;
-    display: inline-block;
+    width: 32px;
+    height: 32px;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: transform 0.2s ease;
+    box-sizing: border-box;
   }
 
   .marker-blu .freccia {
     display: inline-block;
+    width: 32px;
+    height: 32px;
     transition: transform 0.2s ease;
+  }
+
+  .marker-blu .freccia svg {
+    width: 100%;
+    height: 100%;
+    fill: blue;
+    stroke: white;
+    stroke-width: 3;
   }
 
 @keyframes bounce {
