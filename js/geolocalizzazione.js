@@ -68,6 +68,9 @@ export function reverseGeocode(lat, lon) {
 }
 
 export function initGeolocation(callback, debug = false) {
+  let ultimaPosizioneReverse = null;
+  let ultimoReverse = 0;
+
   if (debug) {
     const debugCoords = [
       { lat: 41.638756, lon: 15.453696 },
@@ -128,21 +131,35 @@ export function initGeolocation(callback, debug = false) {
         if (coordsDiv) {
           coordsDiv.innerText = `Latitudine: ${lat}\nLongitudine: ${lon}`;
         }
-        reverseGeocode(lat, lon).then(strada => {
-          window.stradaUtenteReverse = strada;
-          window.codiceAutostradaUtente = trovaCodiceAutostrada(strada);
-          window.modalitaAutostrada = !!window.codiceAutostradaUtente;
-          console.log("🛣️ Modalità autostrada:", window.modalitaAutostrada);
-          const stradaDiv = document.getElementById("strada");
-          if (stradaDiv) {
-            stradaDiv.innerText = `🛣️ ${strada}`;
-          }
-          const autostradaDiv = document.getElementById("autostrada");
-          if (autostradaDiv && window.codiceAutostradaUtente) {
-            const nomi = autostradeMap[window.codiceAutostradaUtente].join(" / ");
-            autostradaDiv.innerText = `🛣️ ${window.codiceAutostradaUtente} – ${nomi}`;
-          }
-        });
+
+        const ora = Date.now();
+        const distanzaDaUltima = ultimaPosizioneReverse
+          ? getDistanceFromLatLonInKm(ultimaPosizioneReverse.lat, ultimaPosizioneReverse.lon, lat, lon)
+          : Infinity;
+
+        const eseguiReverse = !ultimaPosizioneReverse || (ora - ultimoReverse > 10000) || distanzaDaUltima > 0.1;
+
+        if (eseguiReverse) {
+          ultimaPosizioneReverse = { lat, lon };
+          ultimoReverse = ora;
+
+          reverseGeocode(lat, lon).then(strada => {
+            window.stradaUtenteReverse = strada;
+            window.codiceAutostradaUtente = trovaCodiceAutostrada(strada);
+            window.modalitaAutostrada = !!window.codiceAutostradaUtente;
+            console.log("🛣️ Modalità autostrada:", window.modalitaAutostrada);
+            const stradaDiv = document.getElementById("strada");
+            if (stradaDiv) {
+              stradaDiv.innerText = `🛣️ ${strada}`;
+            }
+            const autostradaDiv = document.getElementById("autostrada");
+            if (autostradaDiv && window.codiceAutostradaUtente) {
+              const nomi = autostradeMap[window.codiceAutostradaUtente].join(" / ");
+              autostradaDiv.innerText = `🛣️ ${window.codiceAutostradaUtente} – ${nomi}`;
+            }
+          });
+        }
+
         updateHeading(lat, lon, deviceHeading);
         aggiornaIndicatoreDirezione(userHeading, isHeadingStimato);
 
