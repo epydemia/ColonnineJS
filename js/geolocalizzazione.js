@@ -63,7 +63,7 @@ export function reverseGeocode(lat, lon) {
     .then(data => data.address?.road || data.display_name || "Strada non trovata")
     .catch(err => {
       console.warn("Reverse geocoding fallito:", err);
-      return "Errore";
+      return "Errore: " + (err?.message || err?.toString() || "sconosciuto");
     });
 }
 
