@@ -30,6 +30,7 @@ def enrich_file_with_reverse_geocoding(input_path="free_to_x.json.original.json"
         lon = area.get("lon")
         if lat is not None and lon is not None:
             area["stradaReverse"] = reverse_geocode(lat, lon)
+        area["direzione_geografica"] = carreggiata_logica(area.get("strada", ""), area.get("nome", ""))
         percent = int((idx + 1) / total * 100)
         print(f"Reverse geocoding: {percent}% completato ({idx + 1}/{total})", end="\r")
 
@@ -42,48 +43,52 @@ def enrich_file_with_reverse_geocoding(input_path="free_to_x.json.original.json"
 
 def get_autostrada_direzionale(nome_strada):
     direzioni_autostrade = {
-        "A1": "NORD-SUD",   # Autostrada del Sole – Milano - Napoli
-        "A2": "NORD-SUD",   # Autostrada del Mediterraneo – Salerno - Reggio Calabria
-        "A3": "NORD-SUD",   # Napoli - Salerno (ora parte dell'A2)
-        "A4": "EST-OVEST",  # Torino - Trieste
-        "A5": "NORD-SUD",   # Torino - Aosta - Monte Bianco
-        "A6": "NORD-SUD",   # Torino - Savona
-        "A7": "NORD-SUD",   # Milano - Genova
-        "A8": "EST-OVEST",  # Milano - Varese
-        "A9": "NORD-SUD",   # Lainate - Chiasso
-        "A10": "EST-OVEST", # Genova - Ventimiglia
-        "A11": "EST-OVEST", # Firenze - Pisa
-        "A12": "EST-OVEST", # Genova - Roma
-        "A13": "NORD-SUD",  # Bologna - Padova
-        "A14": "NORD-SUD",  # Bologna - Taranto (Autostrada Adriatica)
-        "A15": "NORD-SUD",  # Parma - La Spezia (Autostrada della Cisa)
-        "A16": "EST-OVEST", # Napoli - Canosa (Autostrada dei Due Mari)
-        "A17": "EST-OVEST", # Bari - Napoli (storica, ora A16/A14)
-        "A18": "NORD-SUD",  # Messina - Catania / Siracusa - Rosolini
-        "A19": "NORD-SUD",  # Palermo - Catania
-        "A20": "EST-OVEST", # Messina - Palermo
-        "A21": "EST-OVEST", # Torino - Brescia
-        "A22": "NORD-SUD",  # Modena - Brennero (Autostrada del Brennero)
-        "A23": "NORD-SUD",  # Palmanova - Tarvisio
-        "A24": "EST-OVEST", # Roma - Teramo (Autostrada dei Parchi)
-        "A25": "EST-OVEST", # Torano - Pescara (Autostrada dei Parchi)
-        "A26": "NORD-SUD",  # Genova Voltri - Gravellona Toce (Autostrada dei Trafori)
-        "A27": "NORD-SUD",  # Mestre - Belluno
-        "A28": "EST-OVEST", # Portogruaro - Conegliano
-        "A29": "EST-OVEST"  # Palermo - Mazara del Vallo (Autostrada del Sale)
+        "A1": "NORD-SUD",    # Milano - Napoli
+        "A2": "NORD-SUD",    # Salerno - Reggio Calabria
+        "A3": "NORD-SUD",    # Napoli - Salerno
+        "A4": "EST-OVEST",   # Torino - Trieste
+        "A5": "NORD-SUD",    # Torino - Monte Bianco
+        "A6": "NORD-SUD",    # Torino - Savona
+        "A7": "NORD-SUD",    # Milano - Genova
+        "A8": "NORDOVEST-SUDEST",  # Varese - Milano
+        "A9": "NORDOVEST-SUDEST",  # Lainate - Chiasso
+        "A10": "EST-OVEST",  # Genova - Ventimiglia
+        "A11": "EST-OVEST",  # Firenze - Pisa
+        "A12": "NORDOVEST-SUDEST", # Genova - Roma
+        "A13": "NORD-SUD",   # Bologna - Padova
+        "A14": "NORD-SUD",   # Bologna - Taranto
+        "A15": "NORD-SUD",   # Parma - La Spezia
+        "A16": "EST-OVEST",  # Napoli - Canosa
+        "A17": "EST-OVEST",  # Bari - Napoli (storica)
+        "A18": "NORD-SUD",   # Messina - Catania
+        "A19": "NORD-SUD",   # Palermo - Catania
+        "A20": "EST-OVEST",  # Messina - Palermo
+        "A21": "EST-OVEST",  # Torino - Brescia
+        "A22": "NORD-SUD",   # Modena - Brennero
+        "A23": "NORD-SUD",   # Palmanova - Tarvisio
+        "A24": "EST-OVEST",  # Roma - Teramo
+        "A25": "EST-OVEST",  # Torano - Pescara
+        "A26": "NORD-SUD",   # Genova Voltri - Gravellona Toce
+        "A27": "NORD-SUD",   # Mestre - Belluno
+        "A28": "EST-OVEST",  # Portogruaro - Conegliano
+        "A29": "EST-OVEST"   # Palermo - Mazara del Vallo
     }
     for codice, direzione in direzioni_autostrade.items():
         if codice in nome_strada:
             return direzione
     return "NON DEFINITO"
 
-def carreggiata_logica(nome_strada, direzione_testuale):
+def carreggiata_logica(nome_strada, nome_area):
     asse = get_autostrada_direzionale(nome_strada)
-    d = direzione_testuale.strip().upper()
+    nome = nome_area.strip().upper()
     if asse == "NORD-SUD":
-        return "SUD" if d in ["OVEST", "SUD"] else "NORD"
+        return "SUD" if "OVEST" in nome or "SUD" in nome else "NORD"
     elif asse == "EST-OVEST":
-        return "EST" if d in ["NORD", "EST"] else "OVEST"
+        return "EST" if "NORD" in nome or "EST" in nome else "OVEST"
+    elif asse == "NORDOVEST-SUDEST":
+        return "SUDEST" if "SUD" in nome or "OVEST" in nome else "NORDOVEST"
+    elif asse == "NORDEST-SUDOVEST":
+        return "SUDOVEST" if "SUD" in nome or "EST" in nome else "NORDEST"
     return "ND"
 
 if __name__ == "__main__":
