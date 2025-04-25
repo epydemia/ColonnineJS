@@ -71,7 +71,8 @@
           ]
         }
       ],
-      "stradaReverse": "Esso, Autostrada Bologna-Padova, Costa di Rovigo, Rovigo, Veneto, 45030, Italia"
+      "stradaReverse": "Esso, Autostrada Bologna-Padova, Costa di Rovigo, Rovigo, Veneto, 45030, Italia",
+      "direzione_geografica": "NORD"
     },
     {
       "codice": "M31",
@@ -150,7 +151,8 @@
           ]
         }
       ],
-      "stradaReverse": "Area di Servizio Adige Ovest, Autostrada Bologna-Padova, Costa di Rovigo, Rovigo, Veneto, 45023, Italia"
+      "stradaReverse": "Area di Servizio Adige Ovest, Autostrada Bologna-Padova, Costa di Rovigo, Rovigo, Veneto, 45023, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "nome": "AEROPORTO MILANO LINATE",
@@ -277,7 +279,8 @@
           ]
         }
       ],
-      "stradaReverse": "Via Forlanini, Cascina Pessina, Novegro, Segrate, Milano, Lombardia, 20054, Italia"
+      "stradaReverse": "Via Forlanini, Peschiera Borromeo, Milano, Lombardia, 20054, Italia",
+      "direzione_geografica": "ND"
     },
     {
       "nome": "AEROPORTO MILANO LINATE PRIME",
@@ -325,7 +328,8 @@
           ]
         }
       ],
-      "stradaReverse": "Viale dell'Aviazione, Parco Monluè - Ponte Lambro, Municipio 4, Milano, Lombardia, 21771, Italia"
+      "stradaReverse": "Viale dell'Aviazione, Parco Monluè - Ponte Lambro, Municipio 4, Milano, Lombardia, 21771, Italia",
+      "direzione_geografica": "ND"
     },
     {
       "nome": "AEROPORTO MILANO MALPENSA",
@@ -411,7 +415,8 @@
           ]
         }
       ],
-      "stradaReverse": "Via Natale Palli, Cascina Case Nuove, Case Nuove, Somma Lombardo, Varese, Lombardia, 21019, Italia"
+      "stradaReverse": "Via Natale Palli, Cascina Case Nuove, Case Nuove, Somma Lombardo, Varese, Lombardia, 21019, Italia",
+      "direzione_geografica": "ND"
     },
     {
       "nome": "AEROPORTO MILANO MALPENSA PRIME",
@@ -457,7 +462,8 @@
           ]
         }
       ],
-      "stradaReverse": "MXP T1 - Partenze, Ferno, Unione dei comuni di Lonate Pozzolo e Ferno, Varese, Lombardia, 21015, Italia"
+      "stradaReverse": "MXP T1 - Partenze, Ferno, Unione dei comuni di Lonate Pozzolo e Ferno, Varese, Lombardia, 21015, Italia",
+      "direzione_geografica": "ND"
     },
     {
       "codice": "493",
@@ -535,7 +541,8 @@
           ]
         }
       ],
-      "stradaReverse": "Esso, Tangenziale di Napoli, Rione La Solfatara, Cigliano, Pozzuoli, Napoli, Campania, 80078, Italia"
+      "stradaReverse": "Esso, Tangenziale di Napoli, Rione La Solfatara, Cigliano, Pozzuoli, Napoli, Campania, 80078, Italia",
+      "direzione_geografica": "NORD"
     },
     {
       "codice": "A20",
@@ -632,7 +639,8 @@
           ]
         }
       ],
-      "stradaReverse": "Area d'Arda Est, Autostrada del Sole, Portone, Fiorenzuola d'Arda, Piacenza, Emilia-Romagna, 29017, Italia"
+      "stradaReverse": "Area d'Arda Est, Autostrada del Sole, Portone, Fiorenzuola d'Arda, Piacenza, Emilia-Romagna, 29017, Italia",
+      "direzione_geografica": "NORD"
     },
     {
       "codice": "A21",
@@ -745,7 +753,8 @@
           ]
         }
       ],
-      "stradaReverse": "Autostrada del Sole, Portone, Fiorenzuola d'Arda, Piacenza, Emilia-Romagna, 29017, Italia"
+      "stradaReverse": "Autostrada del Sole, Portone, Fiorenzuola d'Arda, Piacenza, Emilia-Romagna, 29017, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "Z99",
@@ -859,7 +868,8 @@
           ]
         }
       ],
-      "stradaReverse": "Arno Est, Strada degli Urbini, San Giovanni Valdarno, Arezzo, Toscana, 52027, Italia"
+      "stradaReverse": "Arno Est, Autostrada del Sole, San Giovanni Valdarno, Figline e Incisa Valdarno, Arezzo, Toscana, 52027, Italia",
+      "direzione_geografica": "NORD"
     },
     {
       "codice": "A66",
@@ -973,7 +983,8 @@
           ]
         }
       ],
-      "stradaReverse": "Autostrada del Sole, Piani della Rugginosa, Reggello, Unione di Comuni Valdarno e Valdisieve, Firenze, Toscana, 50064, Italia"
+      "stradaReverse": "Autostrada del Sole, Piani della Rugginosa, Reggello, Unione di Comuni Valdarno e Valdisieve, Firenze, Toscana, 50064, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "J30",
@@ -1051,7 +1062,8 @@
           ]
         }
       ],
-      "stradaReverse": "Area di Aurelia Sud, SS1dir/A, Zinola, Savona, Liguria, 17047, Italia"
+      "stradaReverse": "Area di Aurelia Sud, SS1dir/A, Zinola, Savona, Liguria, 17047, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "A70",
@@ -1165,7 +1177,8 @@
           ]
         }
       ],
-      "stradaReverse": "Autogrill, Autostrada del Sole, Tuori, Viciomaggio, Civitella in Val di Chiana, Arezzo, Toscana, 52041, Italia"
+      "stradaReverse": "Autogrill, Autostrada del Sole, Tuori, Viciomaggio, Civitella in Val di Chiana, Arezzo, Toscana, 52041, Italia",
+      "direzione_geografica": "NORD"
     },
     {
       "codice": "A71",
@@ -1279,7 +1292,8 @@
           ]
         }
       ],
-      "stradaReverse": "Badia al Pino ovest, Autostrada del Sole, Tuori, Viciomaggio, Civitella in Val di Chiana, Arezzo, Toscana, 52041, Italia"
+      "stradaReverse": "Badia al Pino ovest, Autostrada del Sole, Tuori, Viciomaggio, Civitella in Val di Chiana, Arezzo, Toscana, 52041, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "A37",
@@ -1357,7 +1371,8 @@
           ]
         }
       ],
-      "stradaReverse": "Variante di Valico, Badia Vecchia, Castiglione dei Pepoli, Unione dell'Appennino Bolognese, Bologna, Emilia-Romagna, 40035, Italia"
+      "stradaReverse": "Variante di Valico, Badia Vecchia, Castiglione dei Pepoli, Unione dell'Appennino Bolognese, Bologna, Emilia-Romagna, 40035, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "N25",
@@ -1425,7 +1440,8 @@
           ]
         }
       ],
-      "stradaReverse": "Bevano est, 2741p, Autostrada Adriatica, Quartiere Dismano, Santa Maria Nuova Spallicci, Bertinoro, Unione di Comuni della Romagna Forlivese, Forlì-Cesena, Emilia-Romagna, 47032, Italia"
+      "stradaReverse": "Bevano est, 2741p, Autostrada Adriatica, Quartiere Dismano, Santa Maria Nuova Spallicci, Bertinoro, Unione di Comuni della Romagna Forlivese, Forlì-Cesena, Emilia-Romagna, 47032, Italia",
+      "direzione_geografica": "NORD"
     },
     {
       "codice": "D30",
@@ -1534,7 +1550,8 @@
           ]
         }
       ],
-      "stradaReverse": "Brembo nord, Via Vaccarezza, Osio Sopra, Bergamo, Lombardia, 24040, Italia"
+      "stradaReverse": "Brembo nord, Autostrada Serenissima, Osio Sopra, Bergamo, Lombardia, 24040, Italia",
+      "direzione_geografica": "EST"
     },
     {
       "codice": "D20",
@@ -1646,7 +1663,8 @@
           ]
         }
       ],
-      "stradaReverse": "Brianza Nord, Tangenziale Est Esterna, Caponago, Monza e della Brianza, Lombardia, 20867, Italia"
+      "stradaReverse": "Brianza Nord, Via Cascina Trivulzina, Omate, Agrate Brianza, Monza e della Brianza, Lombardia, 20864, Italia",
+      "direzione_geografica": "EST"
     },
     {
       "codice": "D21",
@@ -1762,7 +1780,8 @@
           ]
         }
       ],
-      "stradaReverse": "Brianza Sud, Tangenziale Est Esterna, Caponago, Monza e della Brianza, Lombardia, 20867, Italia"
+      "stradaReverse": "Brianza Sud, Tangenziale Est Esterna, Caponago, Monza e della Brianza, Lombardia, 20867, Italia",
+      "direzione_geografica": "OVEST"
     },
     {
       "codice": "H30",
@@ -1876,7 +1895,8 @@
           ]
         }
       ],
-      "stradaReverse": "Autostrada dei Laghi, Castellazzo, Cascine Maggio, Castronno, Varese, Lombardia, 21040, Italia"
+      "stradaReverse": "Autostrada dei Laghi, Castellazzo, Cascine Maggio, Castronno, Varese, Lombardia, 21040, Italia",
+      "direzione_geografica": "NORDOVEST"
     },
     {
       "codice": "H31",
@@ -1954,7 +1974,8 @@
           ]
         }
       ],
-      "stradaReverse": "Autostrada dei Laghi, Castellazzo, Cascine Maggio, Castronno, Varese, Lombardia, 21040, Italia"
+      "stradaReverse": "Autostrada dei Laghi, Castellazzo, Cascine Maggio, Castronno, Varese, Lombardia, 21040, Italia",
+      "direzione_geografica": "SUDEST"
     },
     {
       "codice": "P40",
@@ -2032,7 +2053,8 @@
           ]
         }
       ],
-      "stradaReverse": "Calaggio Nord, Autostrada dei Due Mari, Vallata, Avellino, Campania, 83059, Italia"
+      "stradaReverse": "Calaggio Nord, Autostrada dei Due Mari, Vallata, Avellino, Campania, 83059, Italia",
+      "direzione_geografica": "NORD"
     },
     {
       "codice": "P41",
@@ -2110,7 +2132,8 @@
           ]
         }
       ],
-      "stradaReverse": "Calaggio Sud, Autostrada dei Due Mari, Vallata, Avellino, Campania, 83059, Italia"
+      "stradaReverse": "Calaggio Sud, Autostrada dei Due Mari, Vallata, Avellino, Campania, 83059, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "O35",
@@ -2188,7 +2211,8 @@
           ]
         }
       ],
-      "stradaReverse": "Area di Servizio Canne della Battaglia Est, Autostrada Adriatica, Andria, Barletta-Andria-Trani, Puglia, 76123, Italia"
+      "stradaReverse": "Area di Servizio Canne della Battaglia Est, Autostrada Adriatica, Andria, Barletta-Andria-Trani, Puglia, 76123, Italia",
+      "direzione_geografica": "NORD"
     },
     {
       "codice": "O36",
@@ -2266,7 +2290,8 @@
           ]
         }
       ],
-      "stradaReverse": "Area di Servizio Canne della Battaglia Ovest, Autostrada Adriatica, Andria, Barletta-Andria-Trani, Puglia, 76123, Italia"
+      "stradaReverse": "Area di Servizio Canne della Battaglia Ovest, Autostrada Adriatica, Andria, Barletta-Andria-Trani, Puglia, 76123, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "A35",
@@ -2344,7 +2369,8 @@
           ]
         }
       ],
-      "stradaReverse": "Cantagallo Est, Autostrada del Sole, San Biagio, Casalecchio di Reno, Unione dei comuni Valli del Reno, Lavino e Samoggia, Bologna, Emilia-Romagna, 40033, Italia"
+      "stradaReverse": "Cantagallo Est, Autostrada del Sole, Villa del Curto, Pontecchio Marconi, Casalecchio di Reno, Unione dei comuni Valli del Reno, Lavino e Samoggia, Bologna, Emilia-Romagna, 40050, Italia",
+      "direzione_geografica": "NORD"
     },
     {
       "codice": "A36",
@@ -2422,7 +2448,8 @@
           ]
         }
       ],
-      "stradaReverse": "Cantagallo Ovest, Autostrada del Sole, San Biagio, Casalecchio di Reno, Unione dei comuni Valli del Reno, Lavino e Samoggia, Bologna, Emilia-Romagna, 40033, Italia"
+      "stradaReverse": "Cantagallo Ovest, Autostrada del Sole, Villa del Curto, Pontecchio Marconi, Casalecchio di Reno, Unione dei comuni Valli del Reno, Lavino e Samoggia, Bologna, Emilia-Romagna, 40050, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "B45",
@@ -2500,7 +2527,8 @@
           ]
         }
       ],
-      "stradaReverse": "Casilina Est, Autostrada del Sole, Castrocielo, Frosinone, Lazio, 03038, Italia"
+      "stradaReverse": "Casilina Est, Via Saudoni, Castrocielo, Frosinone, Lazio, 03031, Italia",
+      "direzione_geografica": "NORD"
     },
     {
       "codice": "B46",
@@ -2614,7 +2642,8 @@
           ]
         }
       ],
-      "stradaReverse": "Casilina Ovest, Autostrada del Sole, Castrocielo, Frosinone, Lazio, 03038, Italia"
+      "stradaReverse": "Casilina Ovest, Via Saudoni, Castrocielo, Frosinone, Lazio, 03031, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "M10",
@@ -2692,7 +2721,8 @@
           ]
         }
       ],
-      "stradaReverse": "Castel Bentivoglio Est, Autostrada Bologna-Padova, Bentivoglio, Unione Reno Galliera, Bologna, Emilia-Romagna, 40010, Italia"
+      "stradaReverse": "Castel Bentivoglio Est, Autostrada Bologna-Padova, Bentivoglio, Unione Reno Galliera, Bologna, Emilia-Romagna, 40010, Italia",
+      "direzione_geografica": "NORD"
     },
     {
       "codice": "M11",
@@ -2770,7 +2800,8 @@
           ]
         }
       ],
-      "stradaReverse": "Castel Bentivoglio Ovest, Autostrada Bologna-Padova, Bentivoglio, Unione Reno Galliera, Bologna, Emilia-Romagna, 40010, Italia"
+      "stradaReverse": "Castel Bentivoglio Ovest, Autostrada Bologna-Padova, Bentivoglio, Unione Reno Galliera, Bologna, Emilia-Romagna, 40010, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "B57",
@@ -2848,7 +2879,8 @@
           ]
         }
       ],
-      "stradaReverse": "Ramo C, Arpino, Cittadella di Casoria, Casoria, Napoli, Campania, 80026, Italia"
+      "stradaReverse": "Ramo C, Arpino, Cittadella di Casoria, Casoria, Napoli, Campania, 80026, Italia",
+      "direzione_geografica": "NORD"
     },
     {
       "codice": "N56",
@@ -2918,7 +2950,8 @@
           ]
         }
       ],
-      "stradaReverse": "Autostrada Adriatica, Numana, Ancona, 60026, Italia"
+      "stradaReverse": "area servizio Conero ovest, Autostrada Adriatica, Numana, Ancona, 60026, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "492",
@@ -2972,7 +3005,8 @@
           ]
         }
       ],
-      "stradaReverse": "Area di Servizio Doganella ovest, Doganella, Municipalità 3, Capodichino, Napoli, Campania, 80141, Italia"
+      "stradaReverse": "Area di Servizio Doganella ovest, Doganella, Municipalità 3, Capodichino, Napoli, Campania, 80141, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "N50",
@@ -3086,7 +3120,8 @@
           ]
         }
       ],
-      "stradaReverse": "Esino Est, Autostrada Adriatica, Chiaravalle, Ancona, 60033, Italia"
+      "stradaReverse": "Esino Est, Autostrada Adriatica, Chiaravalle, Ancona, 60033, Italia",
+      "direzione_geografica": "NORD"
     },
     {
       "codice": "N51",
@@ -3164,7 +3199,8 @@
           ]
         }
       ],
-      "stradaReverse": "Esino Ovest, Autostrada Adriatica, Chiaravalle, Ancona, 60033, Italia"
+      "stradaReverse": "Esino Ovest, Autostrada Adriatica, Chiaravalle, Ancona, 60033, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "A85",
@@ -3278,7 +3314,8 @@
           ]
         }
       ],
-      "stradaReverse": "Autostrada del Sole, Colonnetta, Fabro Scalo, Fabro, Terni, Umbria, 05015, Italia"
+      "stradaReverse": "Autostrada del Sole, Colonnetta, Fabro Scalo, Fabro, Terni, Umbria, 05015, Italia",
+      "direzione_geografica": "NORD"
     },
     {
       "codice": "A86",
@@ -3392,7 +3429,8 @@
           ]
         }
       ],
-      "stradaReverse": "Autostrada del Sole, Colonnetta, Fabro Scalo, Fabro, Terni, Umbria, 05015, Italia"
+      "stradaReverse": "Autostrada del Sole, Colonnetta, Fabro Scalo, Fabro, Terni, Umbria, 05015, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "W30",
@@ -3470,7 +3508,8 @@
           ]
         }
       ],
-      "stradaReverse": "Area servizio Fella Est, Autostrada Alpe-Adria, Bagni di Lusnizza, Malborghetto Valbruna, Udine, Friuli-Venezia Giulia, 33010, Italia"
+      "stradaReverse": "Area servizio Fella Est, Autostrada Alpe-Adria, Bagni di Lusnizza, Malborghetto Valbruna, Udine, Friuli-Venezia Giulia, 33010, Italia",
+      "direzione_geografica": "NORD"
     },
     {
       "codice": "A55",
@@ -3584,7 +3623,8 @@
           ]
         }
       ],
-      "stradaReverse": "Firenze Nord, Via di Limite, Padule, Sesto Fiorentino, Firenze, Toscana, 50041, Italia"
+      "stradaReverse": "Firenze Nord, Via di Limite, Padule, Sesto Fiorentino, Firenze, Toscana, 50041, Italia",
+      "direzione_geografica": "NORD"
     },
     {
       "codice": "B05",
@@ -3636,7 +3676,8 @@
           ]
         }
       ],
-      "stradaReverse": "Flaminia Est, Autostrada del Sole, Foglia, Magliano Sabina, Rieti, Lazio, Italia"
+      "stradaReverse": "Flaminia Est, Autostrada del Sole, Foglia, Magliano Sabina, Rieti, Lazio, Italia",
+      "direzione_geografica": "NORD"
     },
     {
       "codice": "B06",
@@ -3714,7 +3755,8 @@
           ]
         }
       ],
-      "stradaReverse": "Flaminia Ovest, Autostrada del Sole, Foglia, Magliano Sabina, Rieti, Lazio, Italia"
+      "stradaReverse": "Flaminia Ovest, Autostrada del Sole, Foglia, Magliano Sabina, Rieti, Lazio, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "O20",
@@ -3792,7 +3834,8 @@
           ]
         }
       ],
-      "stradaReverse": "Autostrada Adriatica, Foggia, Puglia, Italia"
+      "stradaReverse": "Autostrada Adriatica, Foggia, Puglia, Italia",
+      "direzione_geografica": "NORD"
     },
     {
       "codice": "O21",
@@ -3870,7 +3913,8 @@
           ]
         }
       ],
-      "stradaReverse": "Autostrada Adriatica, Foggia, Puglia, Italia"
+      "stradaReverse": "Autostrada Adriatica, Foggia, Puglia, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "A96",
@@ -3940,7 +3984,8 @@
           ]
         }
       ],
-      "stradaReverse": "Giove ovest, Autostrada del Sole, Giove, Terni, Umbria, 05024, Italia"
+      "stradaReverse": "Giove ovest, Autostrada del Sole, Giove, Terni, Umbria, 05024, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "G70",
@@ -4018,7 +4063,8 @@
           ]
         }
       ],
-      "stradaReverse": "Area di Giovi est, Autostrada dei Giovi - Serravalle, Case Mereta, Ronco Scrivia, Genova, Liguria, 16019, Italia"
+      "stradaReverse": "Area di Giovi est, Autostrada dei Giovi - Serravalle, Case Mereta, Ronco Scrivia, Genova, Liguria, 16019, Italia",
+      "direzione_geografica": "NORD"
     },
     {
       "codice": "G71",
@@ -4096,7 +4142,8 @@
           ]
         }
       ],
-      "stradaReverse": "Autostrada dei Giovi - Serravalle, Case Mereta, Ronco Scrivia, Genova, Liguria, 16019, Italia"
+      "stradaReverse": "Autostrada dei Giovi - Serravalle, Case Mereta, Ronco Scrivia, Genova, Liguria, 16019, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "P20",
@@ -4174,7 +4221,8 @@
           ]
         }
       ],
-      "stradaReverse": "Area di Servizio Irpinia nord, Area di Servizio Irpinia Sud, Partenio, Avellino, Campania, 83100, Italia"
+      "stradaReverse": "Area di Servizio Irpinia nord, Autostrada dei Due Mari, Partenio, Avellino, Campania, 83100, Italia",
+      "direzione_geografica": "NORD"
     },
     {
       "codice": "P21",
@@ -4252,7 +4300,8 @@
           ]
         }
       ],
-      "stradaReverse": "Area di Servizio Irpinia Sud, Partenio, Avellino, Campania, 83100, Italia"
+      "stradaReverse": "Area di Servizio Irpinia sud, Autostrada dei Due Mari, Partenio, Avellino, Campania, 83100, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "B40",
@@ -4366,7 +4415,8 @@
           ]
         }
       ],
-      "stradaReverse": "La Macchia Est, Autostrada del Sole, Monte Trave, Cartiera-Stazione, Anagni, Frosinone, Lazio, Italia"
+      "stradaReverse": "La Macchia Est, Autostrada del Sole, Monte Trave, Cartiera-Stazione, Anagni, Frosinone, Lazio, Italia",
+      "direzione_geografica": "NORD"
     },
     {
       "codice": "B41",
@@ -4480,7 +4530,8 @@
           ]
         }
       ],
-      "stradaReverse": "La Macchia ovest, Autostrada del Sole, Monte Trave, Cartiera-Stazione, Anagni, Frosinone, Lazio, Italia"
+      "stradaReverse": "La Macchia ovest, Autostrada del Sole, Monte Trave, Cartiera-Stazione, Anagni, Frosinone, Lazio, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "N05",
@@ -4596,7 +4647,8 @@
           ]
         }
       ],
-      "stradaReverse": "La Pioppa Est, Autostrada Adriatica, Madonna dei Prati di Tomba, Zola Predosa, Unione dei comuni Valli del Reno, Lavino e Samoggia, Bologna, Emilia-Romagna, 40069, Italia"
+      "stradaReverse": "La Pioppa Est, Autostrada Adriatica, Madonna dei Prati di Tomba, Zola Predosa, Unione dei comuni Valli del Reno, Lavino e Samoggia, Bologna, Emilia-Romagna, 40069, Italia",
+      "direzione_geografica": "NORD"
     },
     {
       "codice": "N06",
@@ -4712,7 +4764,8 @@
           ]
         }
       ],
-      "stradaReverse": "La Pioppa ovest, Autostrada Adriatica, Madonna dei Prati di Tomba, Zola Predosa, Unione dei comuni Valli del Reno, Lavino e Samoggia, Bologna, Emilia-Romagna, 40069, Italia"
+      "stradaReverse": "La Pioppa ovest, Autostrada Adriatica, Madonna dei Prati di Tomba, Zola Predosa, Unione dei comuni Valli del Reno, Lavino e Samoggia, Bologna, Emilia-Romagna, 40069, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "D11",
@@ -4790,7 +4843,8 @@
           ]
         }
       ],
-      "stradaReverse": "Area di Lambro Sud, Via Padre David Maria Turoldo, Cinisello, Cinisello Balsamo, Zona Omogenea Milano Nord, Milano, Lombardia, 20092, Italia"
+      "stradaReverse": "Area di Lambro Sud, A4, Campo dei Fiori, Cinisello, Cinisello Balsamo, Zona Omogenea Milano Nord, Milano, Lombardia, 20092, Italia",
+      "direzione_geografica": "OVEST"
     },
     {
       "codice": "I10",
@@ -4844,7 +4898,8 @@
           ]
         }
       ],
-      "stradaReverse": "Tamoil, Autostrada dei Laghi, Cadorago, Como, Lombardia, 22071, Italia"
+      "stradaReverse": "Tamoil, Autostrada dei Laghi, Cadorago, Como, Lombardia, 22071, Italia",
+      "direzione_geografica": "NORDOVEST"
     },
     {
       "codice": "I11",
@@ -4958,7 +5013,8 @@
           ]
         }
       ],
-      "stradaReverse": "Area di Lario Ovest, Autostrada dei Laghi, Cadorago, Como, Lombardia, 22071, Italia"
+      "stradaReverse": "Area di Lario Ovest, Autostrada dei Laghi, Cadorago, Como, Lombardia, 22071, Italia",
+      "direzione_geografica": "SUDEST"
     },
     {
       "codice": "W11",
@@ -5012,7 +5068,8 @@
           ]
         }
       ],
-      "stradaReverse": "Sarni Oil, Autostrada Alpe-Adria, Casali di Vendoglio, Vendoglio, Colloredo di Monte Albano, Udine, Friuli-Venezia Giulia, 33010, Italia"
+      "stradaReverse": "Sarni Oil, Autostrada Alpe-Adria, Casali di Vendoglio, Vendoglio, Colloredo di Monte Albano, Udine, Friuli-Venezia Giulia, 33010, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "B21",
@@ -5090,7 +5147,8 @@
           ]
         }
       ],
-      "stradaReverse": "Area di servizio Mascherone Ovest, Autostrada del Sole, Capena, Roma Capitale, Lazio, Italia"
+      "stradaReverse": "Area di servizio Mascherone Ovest, Autostrada del Sole, Capena, Roma Capitale, Lazio, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "P31",
@@ -5168,7 +5226,8 @@
           ]
         }
       ],
-      "stradaReverse": "Mirabella Sud, Via Bosco San Prisco, Passo di Mirabella, Mirabella Eclano, Avellino, Campania, 83036, Italia"
+      "stradaReverse": "Mirabella Sud, Via Bosco San Prisco, Passo di Mirabella, Mirabella Eclano, Avellino, Campania, 83036, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "X50",
@@ -5246,7 +5305,8 @@
           ]
         }
       ],
-      "stradaReverse": "Autostrada dei Trafori, Occimiano, Alessandria, Piemonte, Italia"
+      "stradaReverse": "Area di Monferrato Est, Autostrada dei Trafori, Occimiano, Alessandria, Piemonte, Italia",
+      "direzione_geografica": "NORD"
     },
     {
       "codice": "X51",
@@ -5324,7 +5384,8 @@
           ]
         }
       ],
-      "stradaReverse": "Area di Monferrato Ovest, Autostrada dei Trafori, Occimiano, Alessandria, Piemonte, Italia"
+      "stradaReverse": "Area di Monferrato Ovest, Autostrada dei Trafori, Occimiano, Alessandria, Piemonte, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "N36",
@@ -5438,7 +5499,8 @@
           ]
         }
       ],
-      "stradaReverse": "Autostrada Adriatica, Riccione, Rimini, Emilia-Romagna, 47838, Italia"
+      "stradaReverse": "Area di servizio Montefeltro Ovest, Autostrada Adriatica, Riccione, Rimini, Emilia-Romagna, 47838, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "O45",
@@ -5516,7 +5578,8 @@
           ]
         }
       ],
-      "stradaReverse": "Area di Servizio Murge est, Via dei Papaveri, Modugno, Bari, Puglia, 70026, Italia"
+      "stradaReverse": "Area di Servizio Murge est, Autostrada Adriatica, Modugno, Bari, Puglia, 70026, Italia",
+      "direzione_geografica": "NORD"
     },
     {
       "codice": "O46",
@@ -5569,7 +5632,8 @@
           ]
         }
       ],
-      "stradaReverse": "Eni Murge Ovest, Autostrada Adriatica, Modugno, Bari, Puglia, 70026, Italia"
+      "stradaReverse": "Eni Murge Ovest, Autostrada Adriatica, Modugno, Bari, Puglia, 70026, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "D01",
@@ -5647,7 +5711,8 @@
           ]
         }
       ],
-      "stradaReverse": "Area di Novate Nord, Via Polveriera, Novate Milanese, Milano, Lombardia, 20026, Italia"
+      "stradaReverse": "Area di Novate Nord, Via Polveriera, Novate Milanese, Milano, Lombardia, 20026, Italia",
+      "direzione_geografica": "EST"
     },
     {
       "codice": "K11",
@@ -5725,7 +5790,8 @@
           ]
         }
       ],
-      "stradaReverse": "Peretola Sud, Autostrada Firenze-Mare, Ponte a Giogoli, Sesto Fiorentino, Firenze, Toscana, 50145, Italia"
+      "stradaReverse": "Peretola Sud, Autostrada Firenze-Mare, Ponte a Giogoli, Sesto Fiorentino, Firenze, Toscana, 50145, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "N65",
@@ -5803,7 +5869,8 @@
           ]
         }
       ],
-      "stradaReverse": "Autostrada Adriatica, Tre Camini, Campofilone, Fermo, 63827, Italia"
+      "stradaReverse": "Autostrada Adriatica, Tre Camini, Campofilone, Fermo, 63827, Italia",
+      "direzione_geografica": "NORD"
     },
     {
       "codice": "N66",
@@ -5881,7 +5948,8 @@
           ]
         }
       ],
-      "stradaReverse": "Piceno ovest, Autostrada Adriatica, Tre Camini, Campofilone, Fermo, 63827, Italia"
+      "stradaReverse": "Piceno ovest, Autostrada Adriatica, Tre Camini, Campofilone, Fermo, 63827, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "M20",
@@ -5990,7 +6058,8 @@
           ]
         }
       ],
-      "stradaReverse": "Area di servizio Po Est, Autostrada Bologna-Padova, Ferrara, Emilia-Romagna, Italia"
+      "stradaReverse": "Area di servizio Po Est, Autostrada Bologna-Padova, Ferrara, Emilia-Romagna, Italia",
+      "direzione_geografica": "NORD"
     },
     {
       "codice": "M21",
@@ -6104,7 +6173,8 @@
           ]
         }
       ],
-      "stradaReverse": "Area di Servizio Po Ovest, Autostrada Bologna-Padova, Ferrara, Emilia-Romagna, Italia"
+      "stradaReverse": "Area di Servizio Po Ovest, Autostrada Bologna-Padova, Ferrara, Emilia-Romagna, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "B25",
@@ -6182,7 +6252,8 @@
           ]
         }
       ],
-      "stradaReverse": "Autogrill Prenestina Est, Autostrada del Sole, Gallicano nel Lazio, Roma Capitale, Lazio, 00077, Italia"
+      "stradaReverse": "Autogrill Prenestina Est, Autostrada del Sole, Gallicano nel Lazio, Roma Capitale, Lazio, Italia",
+      "direzione_geografica": "NORD"
     },
     {
       "codice": "B26",
@@ -6260,7 +6331,8 @@
           ]
         }
       ],
-      "stradaReverse": "Autogrill Prenestina Ovest, Autostrada del Sole, Gallicano nel Lazio, Roma Capitale, Lazio, 00077, Italia"
+      "stradaReverse": "Autogrill Prenestina Ovest, Autostrada del Sole, Gallicano nel Lazio, Roma Capitale, Lazio, 00077, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "N30",
@@ -6340,7 +6412,8 @@
           ]
         }
       ],
-      "stradaReverse": "Esso, Autostrada Adriatica, Savignano sul Rubicone, Unione Rubicone e mare, Forlì-Cesena, Emilia-Romagna, 47039, Italia"
+      "stradaReverse": "Esso, Autostrada Adriatica, Savignano sul Rubicone, Unione Rubicone e mare, Forlì-Cesena, Emilia-Romagna, 47043, Italia",
+      "direzione_geografica": "NORD"
     },
     {
       "codice": "L90",
@@ -6418,7 +6491,8 @@
           ]
         }
       ],
-      "stradaReverse": "Sant'Ilario Nord, A12 dir. Genova - Recco/Genova Nervi, Molinetti, Levante, Genova, Liguria, 16167, Italia"
+      "stradaReverse": "Sant'Ilario Nord, A12 dir. Genova - Recco/Genova Nervi, Molinetti, Levante, Genova, Liguria, 16167, Italia",
+      "direzione_geografica": "NORD"
     },
     {
       "codice": "L91",
@@ -6496,7 +6570,8 @@
           ]
         }
       ],
-      "stradaReverse": "Sant'Ilario Sud, A12 dir. Livorno - Genova Nervi/Recco, Molinetti, Levante, Genova, Liguria, 16167, Italia"
+      "stradaReverse": "Sant'Ilario Sud, Salita da San Rocco ai Molinetti, Molinetti, Levante, Genova, Liguria, 16167, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "A25",
@@ -6574,7 +6649,8 @@
           ]
         }
       ],
-      "stradaReverse": "Cortile San Martino, Autostrada del Sole, San Martino, Pedrignano, Parma, Emilia-Romagna, 43122, Italia"
+      "stradaReverse": "Cortile San Martino, Autostrada del Sole, San Martino, Pedrignano, Parma, Emilia-Romagna, 43122, Italia",
+      "direzione_geografica": "NORD"
     },
     {
       "codice": "A26",
@@ -6652,7 +6728,8 @@
           ]
         }
       ],
-      "stradaReverse": "Cortile San Martino, Autostrada del Sole, San Lazzaro, Pedrignano, Parma, Emilia-Romagna, 43122, Italia"
+      "stradaReverse": "Cortile San Martino, Autostrada del Sole, San Lazzaro, Pedrignano, Parma, Emilia-Romagna, 43122, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "B55",
@@ -6730,7 +6807,8 @@
           ]
         }
       ],
-      "stradaReverse": "Area servizio San Nicola Est, Autostrada del Sole, San Nicola La Strada, Caserta, Campania, 81025, Italia"
+      "stradaReverse": "Area servizio San Nicola Est, Autostrada del Sole, San Nicola La Strada, Caserta, Campania, 81022, Italia",
+      "direzione_geografica": "NORD"
     },
     {
       "codice": "A10",
@@ -6841,7 +6919,8 @@
           ]
         }
       ],
-      "stradaReverse": "Area di servizio San Zenone est, Autostrada del Sole, Cascina Codazza, San Zenone al Lambro, Milano, Lombardia, 26838, Italia"
+      "stradaReverse": "Area di servizio San Zenone est, Autostrada del Sole, Cascina Codazza, San Zenone al Lambro, Milano, Lombardia, 26858, Italia",
+      "direzione_geografica": "NORD"
     },
     {
       "codice": "A11",
@@ -6947,7 +7026,8 @@
           ]
         }
       ],
-      "stradaReverse": "Area di servizio San Zenone ovest, Autostrada del Sole, Cascina Codazza, San Zenone al Lambro, Milano, Lombardia, 26838, Italia"
+      "stradaReverse": "Area di servizio San Zenone ovest, Autostrada del Sole, Cascina Codazza, San Zenone al Lambro, Milano, Lombardia, 26858, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "N90",
@@ -7020,7 +7100,8 @@
           ]
         }
       ],
-      "stradaReverse": "Area di servizio Sangro Est, Autostrada Adriatica, Torino di Sangro, Chieti, Italia"
+      "stradaReverse": "Area di servizio Sangro Est, Autostrada Adriatica, Torino di Sangro, Chieti, Italia",
+      "direzione_geografica": "NORD"
     },
     {
       "codice": "N91",
@@ -7098,7 +7179,8 @@
           ]
         }
       ],
-      "stradaReverse": "Autostrada Adriatica, Villalfonsina, Chieti, Italia"
+      "stradaReverse": "Autostrada Adriatica, Villalfonsina, Chieti, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "A30",
@@ -7206,7 +7288,8 @@
           ]
         }
       ],
-      "stradaReverse": "19f, Strada Tre Olmi, Tre Olmi, San Faustino-Madonnina-Quattroville, Tre Olmi, Modena, Emilia-Romagna, 41123, Italia"
+      "stradaReverse": "19f, Strada Tre Olmi, Tre Olmi, San Faustino-Madonnina-Quattroville, Tre Olmi, Modena, Emilia-Romagna, 41123, Italia",
+      "direzione_geografica": "NORD"
     },
     {
       "codice": "A31",
@@ -7294,7 +7377,8 @@
           ]
         }
       ],
-      "stradaReverse": "Secchia Ovest, Strada Viazza di Ramo, Tre Olmi, San Faustino-Madonnina-Quattroville, Tre Olmi, Modena, Emilia-Romagna, 41123, Italia"
+      "stradaReverse": "Secchia Ovest, Stradello Cenna, Tre Olmi, San Faustino-Madonnina-Quattroville, Tre Olmi, Modena, Emilia-Romagna, 41011, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "Y30",
@@ -7372,7 +7456,8 @@
           ]
         }
       ],
-      "stradaReverse": "Area di Sile Est, Autostrada d'Alemagna, Casale sul Sile, Casier, Treviso, Veneto, 31030, Italia"
+      "stradaReverse": "Area di Sile Est, Area di servizio Sile Est, Trabucco, Conscio, Casale sul Sile, Treviso, Veneto, 31032, Italia",
+      "direzione_geografica": "NORD"
     },
     {
       "codice": "Y31",
@@ -7450,7 +7535,8 @@
           ]
         }
       ],
-      "stradaReverse": "Area di servizio Sile Ovest, Via Bigone, Scudeller, Conscio, Casale sul Sile, Treviso, Veneto, 31032, Italia"
+      "stradaReverse": "Area di servizio Sile Ovest, Trabucco, Conscio, Casale sul Sile, Treviso, Veneto, 31032, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "N10",
@@ -7564,7 +7650,8 @@
           ]
         }
       ],
-      "stradaReverse": "Sillaro est, Autostrada Adriatica, Zona Industriale San Carlo, Castel San Pietro Terme, Nuovo Circondario Imolese, Bologna, Emilia-Romagna, 40024, Italia"
+      "stradaReverse": "Sillaro est, Via Cà Bianca, Cà Bianca, Zona Industriale San Carlo, Poggio Grande, Castel San Pietro Terme, Nuovo Circondario Imolese, Bologna, Emilia-Romagna, 40024, Italia",
+      "direzione_geografica": "NORD"
     },
     {
       "codice": "N11",
@@ -7642,7 +7729,8 @@
           ]
         }
       ],
-      "stradaReverse": "Sillaro ovest, Autostrada Adriatica, Zona Industriale San Carlo, Castel San Pietro Terme, Nuovo Circondario Imolese, Bologna, Emilia-Romagna, 40024, Italia"
+      "stradaReverse": "Sillaro ovest, Autostrada Adriatica, Zona Industriale San Carlo, Castel San Pietro Terme, Nuovo Circondario Imolese, Bologna, Emilia-Romagna, 40024, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "A15",
@@ -7720,7 +7808,8 @@
           ]
         }
       ],
-      "stradaReverse": "Autostrada del Sole, Castagnoni, San Martino del Pizzolano, Somaglia, Lodi, Lombardia, 26867, Italia"
+      "stradaReverse": "Autostrada del Sole, Castagnoni, San Martino del Pizzolano, Somaglia, Lodi, Lombardia, 26867, Italia",
+      "direzione_geografica": "NORD"
     },
     {
       "codice": "A16",
@@ -7798,7 +7887,8 @@
           ]
         }
       ],
-      "stradaReverse": "Autostrada del Sole, Castagnoni, San Martino del Pizzolano, Somaglia, Lodi, Lombardia, 26867, Italia"
+      "stradaReverse": "Autostrada del Sole, Castagnoni, San Martino del Pizzolano, Somaglia, Lodi, Lombardia, 26867, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "X20",
@@ -7912,7 +8002,8 @@
           ]
         }
       ],
-      "stradaReverse": "Area di Stura Est, Stura Est, Belforte Monferrato, Alessandria, Piemonte, 16060, Italia"
+      "stradaReverse": "Area di Stura Est, Autostrada dei Trafori, Belforte Monferrato, Alessandria, Piemonte, 16060, Italia",
+      "direzione_geografica": "NORD"
     },
     {
       "codice": "X21",
@@ -8026,7 +8117,8 @@
           ]
         }
       ],
-      "stradaReverse": "Area di Stura Ovest, Autostrada dei Trafori, Belforte Monferrato, Alessandria, Piemonte, 16060, Italia"
+      "stradaReverse": "Area di Stura Ovest, Autostrada dei Trafori, Belforte Monferrato, Alessandria, Piemonte, 16060, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "B51",
@@ -8139,7 +8231,8 @@
           ]
         }
       ],
-      "stradaReverse": "Teano Ovest, Autostrada del Sole, Teano, Caserta, Campania, 81057, Italia"
+      "stradaReverse": "Teano Ovest, Strada Provinciale 112 di Teano, Teano, Caserta, Campania, 81057, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "A90",
@@ -8230,7 +8323,8 @@
           ]
         }
       ],
-      "stradaReverse": "Tevere est, Autostrada del Sole, Campo del Pero, Civitella d'Agliano, Viterbo, Lazio, 01024, Italia"
+      "stradaReverse": "Tevere est, Autostrada del Sole, Campo del Pero, Civitella d'Agliano, Viterbo, Lazio, 01024, Italia",
+      "direzione_geografica": "NORD"
     },
     {
       "codice": "L20",
@@ -8308,7 +8402,8 @@
           ]
         }
       ],
-      "stradaReverse": "Tirreno est, Autostrada Azzurra, La Scaglia, Santa Severa Nord, Tolfa, Roma Capitale, Lazio, 00050, Italia"
+      "stradaReverse": "Tirreno est, Autostrada Azzurra, La Scaglia, Santa Severa Nord, Tolfa, Roma Capitale, Lazio, 00050, Italia",
+      "direzione_geografica": "NORD"
     },
     {
       "codice": "L21",
@@ -8386,7 +8481,8 @@
           ]
         }
       ],
-      "stradaReverse": "Tirreno ovest, Autostrada Azzurra, La Scaglia, Santa Severa Nord, Tolfa, Roma Capitale, Lazio, 00050, Italia"
+      "stradaReverse": "Tirreno ovest, Autostrada Azzurra, La Scaglia, Santa Severa Nord, Tolfa, Roma Capitale, Lazio, 00050, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "N80",
@@ -8464,7 +8560,8 @@
           ]
         }
       ],
-      "stradaReverse": "Torre Cerrano est, Via dei Garofani, Silvi, Teramo, Abruzzo, 64029, Italia"
+      "stradaReverse": "Torre Cerrano est, Via dei Garofani, Silvi, Teramo, Abruzzo, 64029, Italia",
+      "direzione_geografica": "NORD"
     },
     {
       "codice": "N81",
@@ -8542,7 +8639,8 @@
           ]
         }
       ],
-      "stradaReverse": "Torre Cerrano ovest, Autostrada Adriatica, Silvi, Teramo, Abruzzo, 64029, Italia"
+      "stradaReverse": "Torre Cerrano ovest, Autostrada Adriatica, Silvi, Teramo, Abruzzo, 64029, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "O10",
@@ -8620,7 +8718,8 @@
           ]
         }
       ],
-      "stradaReverse": "Area di servizio Torre Fantine est, Autostrada Adriatica, Chieuti, Foggia, Puglia, Italia"
+      "stradaReverse": "Area di servizio Torre Fantine est, Autostrada Adriatica, Chieuti, Foggia, Puglia, Italia",
+      "direzione_geografica": "NORD"
     },
     {
       "codice": "O11",
@@ -8698,7 +8797,8 @@
           ]
         }
       ],
-      "stradaReverse": "Area di servizio Torre Fantine ovest, Autostrada Adriatica, Chieuti, Foggia, Puglia, Italia"
+      "stradaReverse": "Area di servizio Torre Fantine ovest, Autostrada Adriatica, Chieuti, Foggia, Puglia, Italia",
+      "direzione_geografica": "SUD"
     },
     {
       "codice": "D50",
@@ -8812,7 +8912,8 @@
           ]
         }
       ],
-      "stradaReverse": "Val Trompia Nord, Via Cascina Fiorita, Roncadelle, Brescia, Lombardia, 25030, Italia"
+      "stradaReverse": "Val Trompia Nord, Via Enrico Fermi, Roncadelle, Brescia, Lombardia, 25030, Italia",
+      "direzione_geografica": "EST"
     },
     {
       "codice": "D51",
@@ -8908,7 +9009,8 @@
           ]
         }
       ],
-      "stradaReverse": "Val Trompia Sud, Via Enrico Fermi, Roncadelle, Brescia, Lombardia, 25030, Italia"
+      "stradaReverse": "Val Trompia Sud, Via Enrico Fermi, Roncadelle, Brescia, Lombardia, 25030, Italia",
+      "direzione_geografica": "OVEST"
     },
     {
       "codice": "H10",
@@ -9022,7 +9124,8 @@
           ]
         }
       ],
-      "stradaReverse": "Area di Villoresi Est, Autostrada dei Laghi, Pagliera, Lainate, Milano, Lombardia, 20045, Italia"
+      "stradaReverse": "Area di Villoresi Est, Autostrada dei Laghi, Pagliera, Lainate, Milano, Lombardia, 20045, Italia",
+      "direzione_geografica": "NORDOVEST"
     },
     {
       "codice": "H11",
@@ -9136,7 +9239,8 @@
           ]
         }
       ],
-      "stradaReverse": "Area di Villoresi Ovest, Autostrada dei Laghi, Pagliera, Lainate, Milano, Lombardia, 20045, Italia"
+      "stradaReverse": "Area di Villoresi Ovest, Autostrada dei Laghi, Pagliera, Lainate, Milano, Lombardia, 20045, Italia",
+      "direzione_geografica": "SUDEST"
     }
   ],
   "data_download": "2025-04-18T12:42:51.282045Z"
