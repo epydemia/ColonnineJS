@@ -1,0 +1,53 @@
+<!--
+  This HTML document provides an interactive overview of charging stations along Italian highways.
+  It includes a dropdown to select a highway and a visual bar to represent the locations of charging stations.
+  The data is fetched from a JSON file and displayed dynamically using JavaScript.
+  The visual bar is updated based on the selected highway, showing markers for each charging station.
+  The markers are positioned based on their kilometer location along the highway.-->
+
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Panoramica Autostrade</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    #visual-bar-container {
+      margin: 2em auto;
+      max-width: 90%;
+      height: 20px;
+      background: #ddd;
+      position: relative;
+      border-radius: 10px;
+    }
+    #visual-bar {
+      height: 100%;
+      background: #ccc;
+      position: relative;
+      border-radius: 10px;
+    }
+    .marker-icon {
+      position: absolute;
+      top: -6px;
+      width: 16px;
+      height: 16px;
+      background: red;
+      border-radius: 50%;
+      border: 2px solid white;
+    }
+  </style>
+</head>
+<body>
+  <h1>📊 Panoramica Colonnine per Autostrada</h1>
+
+  <label for="autostradaSelect">Scegli un'autostrada:</label>
+  <select id="autostradaSelect"></select>
+
+  <div id="visual-bar-container">
+    <div id="visual-bar"></div>
+  </div>
+
+  <script type="module" src="js/autostrade.js"></script>
+</body>
+</html>
